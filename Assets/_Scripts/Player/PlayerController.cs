@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
-    [Tooltip("Player move speed.")]
     [SerializeField] private float moveSpeed = 5f;
 
     void Start()
