@@ -8,6 +8,9 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] private int renderDistance = 40;
 
     [SerializeField] private GameObject groundPrefab;
+    [SerializeField] private GameObject[] objectsPrefabs;
+    [SerializeField] private int objectSpawnTries = 20;
+    [SerializeField] private float objectSpawnChance = 0.7f;
 
     private Vector2 tileSize;
     private Dictionary<Vector2Int, GameObject> groundTiles;
@@ -29,11 +32,27 @@ public class TerrainGenerator : MonoBehaviour
         );
     }
 
+    void AddObjects(GameObject tile)
+    {
+        for (int i = 0; i < objectSpawnTries; i++)
+        {
+            if (Random.value > objectSpawnChance) continue;
+            GameObject randomObject = objectsPrefabs[Random.Range(0, objectsPrefabs.Length)];
+            Vector2 objectSize = randomObject.GetComponent<SpriteRenderer>().bounds.size;
+            Vector2 objectPosition = tile.transform.position + new Vector3(
+                Random.Range(-tileSize.x / 2 + objectSize.x / 2, tileSize.x / 2 - objectSize.x / 2),
+                Random.Range(-tileSize.y / 2 + objectSize.y / 2, tileSize.y / 2 - objectSize.y / 2)
+            );
+            Instantiate(randomObject, objectPosition, Quaternion.identity, tile.transform);
+        }
+    }
+
     void TryGenerateTile(Vector2Int position)
     {
         if (!groundTiles.ContainsKey(position))
         {
             GameObject newTile = Instantiate(groundPrefab, position * tileSize, Quaternion.identity, transform);
+            AddObjects(newTile);
             groundTiles[position] = newTile;
         }
     }
