@@ -1,32 +1,27 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MovementController
 {
-    private Rigidbody2D rb;
-    private Vector2 moveInput;
+    [SerializeField] private float moveSpeed;
+    private Vector2 moveInput = Vector2.zero;
 
-    [SerializeField] private float moveSpeed = 5f;
-
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    public void OnMove(InputValue value)
+    void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
     }
 
-
-    private void FixedUpdate()
+    protected override void UpdateVelocity()
     {
-        rb.linearVelocity = moveInput * moveSpeed;
+        rigidBody.linearVelocity = moveInput * moveSpeed;
+    }
+
+    protected override void UpdateRotation()
+    {
         if (moveInput != Vector2.zero)
         {
-            // Rotate the player to face the direction of movement
             float angle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg - 90f;
-            rb.rotation = angle;
+            rigidBody.MoveRotation(angle);
         }
     }
 }
