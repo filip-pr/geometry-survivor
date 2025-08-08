@@ -5,12 +5,12 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     [SerializeField] private Transform generationCenter;
-    [SerializeField] private int generationDistance;
+    [SerializeField] private int generationDistance = 10;
 
     [SerializeField] private GameObject mapTilePrefab;
     [SerializeField] private GameObject[] structurePrefabs;
-    [SerializeField] private int structureSpawnTries;
-    [SerializeField] private float structureSpawnChance;
+    [SerializeField] private int structureSpawnTries = 20;
+    [SerializeField] private float structureSpawnChance = 0.5f;
 
     private Vector2 mapTileSize;
     private Dictionary<Vector2Int, GameObject> mapTiles;
@@ -62,7 +62,6 @@ public class MapManager : MonoBehaviour
     {
         int countX = Mathf.CeilToInt(generationDistance / mapTileSize.x);
         int countY = Mathf.CeilToInt(generationDistance / mapTileSize.y);
-        Debug.Log($"counts: {countX} {countY}, center {generationCenterTile}, player {generationCenter.position}");
         for (int x = -countX; x <= countX; x++)
         {
             for (int y = -countY; y <= countY; y++)
