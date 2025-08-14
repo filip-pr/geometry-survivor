@@ -4,17 +4,17 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     [SerializeField] private float maxHeath = 100f;
-    [SerializeField] private bool isProjectile = false;
-    [SerializeField] private UnityEvent onDeath;
+    [SerializeField] private float currentHealth;
 
-    private float currentHealth;
+    private DeathHandler deathHandler;
 
     private void Start()
     {
         currentHealth = maxHeath;
+        deathHandler = GetComponent<DeathHandler>();
     }
     
-    protected void Heal(float health)
+    public void Heal(float health)
     {
         currentHealth += health;
         if (currentHealth > maxHeath)
@@ -28,23 +28,26 @@ public class Health : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            onDeath?.Invoke();
+            currentHealth = 0;
+            deathHandler.HandleDeath();
         }
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collider)
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<DamageDealer>(out var damageDealer))
+        {
+            Damage(damageDealer.EnemyDamage);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.TryGetComponent<DamageDealer>(out var damageDealer))
         {
-            if (isProjectile)
-            {
-                Damage(damageDealer.DamageToProjectiles);
-            }
-            else
-            {
-                Damage(damageDealer.DamageToCreatures);
-            }
+            Damage(damageDealer.ProjectileDamage);
         }
     }
+
 }
 

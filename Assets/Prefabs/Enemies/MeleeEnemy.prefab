@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7075795541884803207}
   - component: {fileID: 1532923515031577745}
   - component: {fileID: 8748438679195514341}
-  - component: {fileID: 7798591810651496233}
   - component: {fileID: 2253078268532881415}
   - component: {fileID: 770192211896840526}
   - component: {fileID: 3774580197794317398}
@@ -107,7 +106,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 1000000
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -121,52 +120,6 @@ Rigidbody2D:
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!61 &8748438679195514341
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3959644142728701306}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!61 &7798591810651496233
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,7 +163,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &2253078268532881415
 MonoBehaviour:
@@ -226,8 +179,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   knockbackResistance: 0
-  desiredDistanceMin: 2
-  desiredDistanceMax: 5
+  desiredDistanceMin: 0
+  desiredDistanceMax: 0
 --- !u!114 &770192211896840526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,8 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d029d0e26cc8a942b30b2bfad3dc6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamageToCreatures: 1
-  baseDamageToProjectiles: 1
+  baseEnemyDamage: 0.2
+  baseProjectileDamage: 1
 --- !u!114 &3774580197794317398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,19 +208,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHeath: 100
-  isProjectile: 0
-  onDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11500000, guid: 6ecc6770467badb42b09eae3e7b6f377, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: set_name
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: HandleDeath
-          m_BoolArgument: 0
-        m_CallState: 2
+  currentHealth: 0
