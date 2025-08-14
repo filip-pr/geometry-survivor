@@ -8,7 +8,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private int generationDistance = 10;
 
     [SerializeField] private GameObject mapTilePrefab;
-    [SerializeField] private GameObject[] structurePrefabs;
+    [SerializeField] private StructureData[] structures;
     [SerializeField] private int structureSpawnTries = 20;
     [SerializeField] private float structureSpawnChance = 0.5f;
 
@@ -32,19 +32,30 @@ public class MapManager : MonoBehaviour
         GenerateMapTiles();
     }
 
-
     void AddStructures(GameObject tile)
     {
+        List<GameObject> placedStructures = new();
         for (int i = 0; i < structureSpawnTries; i++)
         {
             if (Random.value > structureSpawnChance) continue;
-            GameObject randomObject = structurePrefabs[Random.Range(0, structurePrefabs.Length)];
-            Vector2 objectSize = randomObject.GetComponent<SpriteRenderer>().bounds.size;
-            Vector2 objectPosition = tile.transform.position + new Vector3(
-                Random.Range(-mapTileSize.x / 2 + objectSize.x / 2, mapTileSize.x / 2 - objectSize.x / 2),
-                Random.Range(-mapTileSize.y / 2 + objectSize.y / 2, mapTileSize.y / 2 - objectSize.y / 2)
+            bool structureFits = true;
+            GameObject randomStructure = WeightedRandom.Choose(structures).structurePrefab;
+            Vector2 structureSize = randomStructure.GetComponent<SpriteRenderer>().bounds.size;
+            Vector2 structurePosition = tile.transform.position + new Vector3(
+                Random.Range(-mapTileSize.x / 2 + structureSize.x / 2, mapTileSize.x / 2 - structureSize.x / 2),
+                Random.Range(-mapTileSize.y / 2 + structureSize.y / 2, mapTileSize.y / 2 - structureSize.y / 2)
             );
-            Instantiate(randomObject, objectPosition, Quaternion.identity, tile.transform);
+            foreach (var placedStructure in placedStructures)
+            {
+                if (placedStructure.GetComponent<SpriteRenderer>().bounds.Intersects(
+                    new Bounds(structurePosition, structureSize)))
+                {
+                    structureFits = false;
+                    break;
+                }
+            }
+            if (!structureFits) continue;
+            placedStructures.Add(Instantiate(randomStructure, structurePosition, Quaternion.identity, tile.transform));
         }
     }
 
