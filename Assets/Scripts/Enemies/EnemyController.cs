@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyController : MovementController
 {
 
-    [SerializeField] private float desiredDistanceMin = 0;
+    [SerializeField] private float desiredDistanceMin = 0f;
     [SerializeField] private float desiredDistanceMax = 0.1f;
     public Transform Target { get; set; }
 
