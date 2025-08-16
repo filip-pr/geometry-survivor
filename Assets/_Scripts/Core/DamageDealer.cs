@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class DamageDealer : MonoBehaviour
 {
-    [SerializeField] private float baseEnemyDamage = 0.2f;
-    [SerializeField] private float baseProjectileDamage = 1f;
+    [SerializeField] private float baseDamage = 0.2f;
+    [SerializeField] private float baseKnockback = 5f;
 
-    public float EnemyDamageMultiplier { get; set; } = 1f;
-    public float ProjectileDamageMultiplier { get; set; } = 1f;
+    public float DamageMultiplier { get; set; } = 1f;
+    public float KnockbackMultiplier { get; set; } = 1f;
 
-    public float EnemyDamage => baseEnemyDamage * EnemyDamageMultiplier;
-    public float ProjectileDamage => baseProjectileDamage * ProjectileDamageMultiplier;
+    public float Damage => baseDamage * DamageMultiplier;
+    public float Knockback => baseKnockback * KnockbackMultiplier;
 
 }

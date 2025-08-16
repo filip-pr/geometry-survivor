@@ -61,20 +61,26 @@ public class Health : MonoBehaviour
         Damage(-health);
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void HandleCollision(GameObject other)
     {
-        if (collision.gameObject.TryGetComponent<DamageDealer>(out var damageDealer))
+        if (other.TryGetComponent<DamageDealer>(out var damageDealer))
         {
-            Damage(damageDealer.EnemyDamage);
+            Damage(damageDealer.Damage);
         }
+        if (gameObject.TryGetComponent<MovementController>(out var movementController))
+        {
+            movementController.Push(other.transform.position - transform.position, damageDealer.Knockback);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        HandleCollision(collision.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.TryGetComponent<DamageDealer>(out var damageDealer))
-        {
-            Damage(damageDealer.ProjectileDamage);
-        }
+        HandleCollision(transform.parent.gameObject);
     }
 
 }

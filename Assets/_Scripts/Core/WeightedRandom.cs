@@ -8,7 +8,7 @@ public interface IWeightedItem
 
 public static class WeightedRandom
 {
-    public static T Choose<T>(IEnumerable<T> items) where T : IWeightedItem // TODO potentially optimize with binary search
+    public static T Choose<T>(IEnumerable<T> items) where T : IWeightedItem
     {
         float totalWeight = 0f;
         foreach (var item in items)

@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class MovementController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float knockbackResistance = 0f;
+    [SerializeField] private float knockbackResistance = 0.5f;
 
     protected Vector2 knockbackVelocity = Vector2.zero;
     protected Rigidbody2D rigidBody;

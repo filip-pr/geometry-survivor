@@ -208,9 +208,11 @@ MonoBehaviour:
   generationCenter: {fileID: 318050166}
   generationDistance: 2
   mapTilePrefab: {fileID: 235769387310890865, guid: bc5f9dc7409e3ff4a94b67ca4dd92ce3, type: 3}
-  structurePrefabs:
-  - {fileID: 3284108822619943018, guid: 58edb17f0d205c94299a27883d535a3f, type: 3}
-  - {fileID: 5888236278416456877, guid: ac037cae8eedc0343949fa7ad19ce043, type: 3}
+  structures:
+  - structurePrefab: {fileID: 3284108822619943018, guid: 58edb17f0d205c94299a27883d535a3f, type: 3}
+    spawnWeight: 10
+  - structurePrefab: {fileID: 5888236278416456877, guid: ac037cae8eedc0343949fa7ad19ce043, type: 3}
+    spawnWeight: 50
   structureSpawnTries: 20
   structureSpawnChance: 0.5
 --- !u!4 &420339611
@@ -261,7 +263,10 @@ MonoBehaviour:
   minSpawnDistance: 5
   maxSpawnDistance: 10
   healthBarCanvas: {fileID: 1279977696}
-  enemyPrefab: {fileID: 3959644142728701306, guid: 7e3bc023933553948869f92791f98f09, type: 3}
+  enemies:
+  - enemyPrefab: {fileID: 3959644142728701306, guid: 7e3bc023933553948869f92791f98f09, type: 3}
+    spawnWeight: 10
+    spawnPointCost: 2
   spawnPoints: 0
 --- !u!4 &438759292
 Transform:
