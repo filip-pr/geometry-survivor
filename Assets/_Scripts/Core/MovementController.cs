@@ -2,10 +2,12 @@ using UnityEngine;
 
 public abstract class MovementController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float knockbackResistance = 0.5f;
+    [SerializeField] protected float moveSpeed = 5f;
+    [SerializeField] protected float knockbackResistance = 0f;
+    [SerializeField] protected float knockbackDecayRate = 20f;
 
-    protected Vector2 knockbackVelocity = Vector2.zero;
+    private Vector2 knockbackVelocity = Vector2.zero;
+
     protected Rigidbody2D rigidBody;
 
     private void Start()
@@ -15,7 +17,7 @@ public abstract class MovementController : MonoBehaviour
 
     public void Push(Vector2 direction, float force)
     {
-        knockbackVelocity += direction.normalized * force;
+        knockbackVelocity += direction.normalized * force * (1-knockbackResistance);
     }
 
     protected abstract Vector2 GetMovementDirection();
@@ -31,8 +33,15 @@ public abstract class MovementController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, knockbackResistance * Time.fixedDeltaTime);
-        rigidBody.linearVelocity = moveSpeed * GetMovementDirection().normalized + knockbackVelocity;
-        UpdateRotation();
+        if (knockbackVelocity.magnitude >= 0.01f)
+        {
+            knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, knockbackDecayRate * Time.fixedDeltaTime);
+            rigidBody.linearVelocity = knockbackVelocity;
+        }
+        else
+        {
+            rigidBody.linearVelocity = moveSpeed * GetMovementDirection().normalized;
+            UpdateRotation();
+        }
     }
 }

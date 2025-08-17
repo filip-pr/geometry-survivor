@@ -1,13 +1,27 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class SpinnerBladeItem : MonoBehaviour
+public class SpinnerBladeItem : PlayerItem
 {
-    [SerializeField] private Transform target;
+    public override int MaxLevel => 1;
 
-    [SerializeField] private float rotationSpeed = 100f;
+    [SerializeField] private GameObject spinnerBladePrefab;
 
-    void Update()
+    [SerializeField] private GameObject[] spinnerBlades;
+
+    protected override void OnLevelUp()
     {
-       
+        foreach (var blade in spinnerBlades)
+        {
+            Destroy(blade);
+        }
+        switch (Level)
+        {
+            case 1:
+                Instantiate(spinnerBladePrefab, transform.position, Quaternion.identity, transform);
+                break;
+            
+        }
     }
 }

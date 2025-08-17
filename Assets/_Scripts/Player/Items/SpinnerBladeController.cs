@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class SpinnerBladeController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float rotationSpeed = 180f;
 
-    // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
-        
+        transform.position = transform.parent.position;
+        transform.rotation = Quaternion.Euler(0, 0, Time.time * rotationSpeed);
     }
 }
