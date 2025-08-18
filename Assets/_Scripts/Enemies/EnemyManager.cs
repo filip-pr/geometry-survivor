@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float maxSpawnDistance = 10f;
 
     [SerializeField] private Canvas healthBarCanvas;
-    [SerializeField] private EnemyData[] enemies;
+    [SerializeField] private EnemySpawnData[] enemies;
 
     [SerializeField] private int spawnPoints = 0;
 
@@ -30,8 +30,8 @@ public class EnemyManager : MonoBehaviour
     {
         Vector2 spawnPosition = Random.insideUnitCircle.normalized * Random.Range(minSpawnDistance, maxSpawnDistance);
         spawnPosition += (Vector2)enemyTarget.position;
-        EnemyData spawnedEnemyData = WeightedRandom.Choose(enemies);
-        GameObject enemy = Instantiate(spawnedEnemyData.enemyPrefab, spawnPosition, Quaternion.identity, transform);
+        EnemySpawnData spawnedEnemyData = WeightedRandom.Choose(enemies);
+        GameObject enemy = Instantiate(spawnedEnemyData.EnemyPrefab, spawnPosition, Quaternion.identity, transform);
         if (enemy.TryGetComponent<Health>(out var enemyHealth))
         {
             enemyHealth.SetupHealthBar(healthBarCanvas);
@@ -40,7 +40,7 @@ public class EnemyManager : MonoBehaviour
         {
             enemyController.Target = enemyTarget;
         }
-        spawnPoints -= spawnedEnemyData.spawnPointCost;
+        spawnPoints -= spawnedEnemyData.SpawnPointCost;
     }
 
     private void Update()

@@ -8,7 +8,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private int generationDistance = 10;
 
     [SerializeField] private GameObject mapTilePrefab;
-    [SerializeField] private StructureData[] structures;
+    [SerializeField] private MapStructureSpawnData[] structures;
     [SerializeField] private int structureSpawnTries = 20;
     [SerializeField] private float structureSpawnChance = 0.5f;
 
@@ -39,7 +39,7 @@ public class MapManager : MonoBehaviour
         {
             if (Random.value > structureSpawnChance) continue;
             bool structureFits = true;
-            GameObject randomStructure = WeightedRandom.Choose(structures).structurePrefab;
+            GameObject randomStructure = WeightedRandom.Choose(structures).StructurePrefab;
             Vector2 structureSize = randomStructure.GetComponent<SpriteRenderer>().bounds.size;
             Vector2 structurePosition = tile.transform.position + new Vector3(
                 Random.Range(-mapTileSize.x / 2 + structureSize.x / 2, mapTileSize.x / 2 - structureSize.x / 2),
@@ -78,8 +78,6 @@ public class MapManager : MonoBehaviour
             for (int y = -countY; y <= countY; y++)
             {
                 Vector2Int tilePosition = generationCenterTile + new Vector2Int(x, y);
-                
-
                 GenerateMapTile(tilePosition);
             }
         }

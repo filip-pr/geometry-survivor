@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 1358455127241729722}
   - component: {fileID: 6814449216475784986}
   - component: {fileID: 8430454294713056592}
+  - component: {fileID: 3001829379866026340}
+  - component: {fileID: 7187710536226354174}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -32,10 +34,11 @@ Transform:
   m_GameObject: {fileID: 1034215381943579078}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1213861013564032584}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1236699791459091402
@@ -83,7 +86,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: d459999b9b2361145a3e17e0f1e4c5dd, type: 3}
-  m_Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
+  m_Color: {r: 0.39021894, g: 0.5497129, b: 0.745283, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -214,8 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   knockbackResistance: 0
-  knockbackVelocity: {x: 0, y: 0}
-  knockbackDuration: 0
+  knockbackDecayRate: 20
 --- !u!114 &6814449216475784986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c982654228490c43a1c0046ee687105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHeath: 100
+  MaxHeath: 100
   currentHealth: 0
   healthBarPrefab: {fileID: 4823539986313456293, guid: 779e250f04d62b04e9db8ba0c8ab0198, type: 3}
 --- !u!114 &8430454294713056592
@@ -243,3 +245,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecc6770467badb42b09eae3e7b6f377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3001829379866026340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034215381943579078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b1302f95014704285aaeb17c81ddbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allItemsData: []
+  heldItems: []
+--- !u!114 &7187710536226354174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034215381943579078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 349e1bcfb1d3fb741bbd1c67320d1c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  experience: 0
+--- !u!1 &7601290210769955435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1213861013564032584}
+  - component: {fileID: 2901251942492961662}
+  m_Layer: 0
+  m_Name: SpinnerBladeItem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1213861013564032584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601290210769955435}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1425592297877460540}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2901251942492961662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601290210769955435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79d2498f0a551064b8ec4882f0664623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinnerBladePrefab: {fileID: 6063251402741825420, guid: 85fac71481e168c4da8b30546fe55c0e, type: 3}
+  spinnerBlades: []

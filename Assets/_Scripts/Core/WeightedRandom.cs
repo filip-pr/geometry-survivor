@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public interface IWeightedItem
@@ -15,7 +16,7 @@ public static class WeightedRandom
         {
             totalWeight += item.Weight;
         }
-        if (totalWeight < 0f)
+        if (totalWeight <= 0f)
         {
             return default;
         }
@@ -30,5 +31,19 @@ public static class WeightedRandom
             }
         }
         return default;
+    }
+
+    public static List<T> ChooseN<T>(IEnumerable<T> items, int n) where T : IWeightedItem
+    {
+        List<T> chosenItems = new List<T>();
+        List<T> itemsCopy = items.ToList();
+        for (int i = 0; i < n; i++)
+        {
+            T chosenItem = Choose(items);
+            if (chosenItem == null) break;
+            chosenItems.Add(chosenItem);
+            itemsCopy.Remove(chosenItem);
+        }
+        return chosenItems;
     }
 }
