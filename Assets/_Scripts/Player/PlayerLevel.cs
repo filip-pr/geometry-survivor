@@ -1,11 +1,22 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerLevel : MonoBehaviour
 {
     [SerializeField] private int level = 1;
     [SerializeField] private float experience = 0f;
 
+    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private Slider experienceBar;
+
     private float ExperienceNeeded => level * 100f;
+
+    private void Start()
+    {
+        levelText.text = $"Level: {level}";
+        experienceBar.maxValue = ExperienceNeeded;
+    }
 
     private void OnLevelUp()
     {
@@ -17,6 +28,8 @@ public class PlayerLevel : MonoBehaviour
         {
             inventory.AddOrUpgradeItem();
         }
+        levelText.text = $"Level: {level}";
+        experienceBar.maxValue = ExperienceNeeded;
     }
 
     public void GainExperience(float amount)
@@ -28,5 +41,6 @@ public class PlayerLevel : MonoBehaviour
             level++;
             OnLevelUp();
         }
+        experienceBar.value = experience;
     }
 }
