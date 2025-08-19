@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyXPDropDeathHandler : DeathHandler
+public class EnemyExperienceDropDeathHandler : DeathHandler
 {
     [SerializeField] private GameObject experiencePrefab;
 

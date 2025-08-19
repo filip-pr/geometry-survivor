@@ -9,6 +9,10 @@ public class DamageDealer : MonoBehaviour
 
     private void HandleCollision(GameObject other)
     {
+        if (gameObject.tag == other.tag)
+        {
+            return;
+        }
         if (other.TryGetComponent<Health>(out var health))
         {
             health.Damage(Damage);

@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 2253078268532881415}
   - component: {fileID: 770192211896840526}
   - component: {fileID: 3774580197794317398}
-  - component: {fileID: -4201228095437657911}
+  - component: {fileID: 4551268800541730027}
   m_Layer: 0
   m_Name: MeleeEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,10 +209,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c982654228490c43a1c0046ee687105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHeath: 100
+  MaxHeath: 100
   currentHealth: 0
   healthBarPrefab: {fileID: 8624029345614730195, guid: 3a8df56b0bdec1948bff774b3679c961, type: 3}
---- !u!114 &-4201228095437657911
+--- !u!114 &4551268800541730027
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,6 +221,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3959644142728701306}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ecc6770467badb42b09eae3e7b6f377, type: 3}
+  m_Script: {fileID: 11500000, guid: df7c73fe4a6a1d844a03dd7850040c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  experiencePrefab: {fileID: 7201496818743374038, guid: 26b1934815a4f00448b2667a9ce01c4c, type: 3}
