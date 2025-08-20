@@ -5,11 +5,15 @@ public class Timer : MonoBehaviour
 {
     TextMeshProUGUI textMesh;
 
-    private string FormattedTime(float time)
+    private string TimeText
     {
-        int minutes = Mathf.FloorToInt(time / 60);
-        int seconds = Mathf.FloorToInt(time % 60);
-        return string.Format("{0:00}:{1:00}", minutes, seconds);
+        get
+        {
+            float time = Time.timeSinceLevelLoad;
+            int minutes = Mathf.FloorToInt(time / 60);
+            int seconds = Mathf.FloorToInt(time % 60);
+            return "Time: " + string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
     }
 
     void Start()
@@ -19,6 +23,6 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        textMesh.text = "Time: " + FormattedTime(Time.timeSinceLevelLoad);
+        textMesh.text = TimeText;
     }
 }

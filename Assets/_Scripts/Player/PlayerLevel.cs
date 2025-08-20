@@ -12,9 +12,11 @@ public class PlayerLevel : MonoBehaviour
 
     private float ExperienceNeeded => level * 100f;
 
+    private string LevelText => $"Level: {level}";
+
     private void Start()
     {
-        levelText.text = $"Level: {level}";
+        levelText.text = LevelText;
         experienceBar.maxValue = ExperienceNeeded;
     }
 
@@ -28,7 +30,7 @@ public class PlayerLevel : MonoBehaviour
         {
             inventory.AddOrUpgradeItem();
         }
-        levelText.text = $"Level: {level}";
+        levelText.text = LevelText;
         experienceBar.maxValue = ExperienceNeeded;
     }
 

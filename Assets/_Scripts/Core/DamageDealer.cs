@@ -3,9 +3,16 @@ using UnityEngine;
 public class DamageDealer : MonoBehaviour
 {
     [SerializeField] private float baseDamage = 0.2f;
+    public DamageModifier DamageModifier { get; set; }
+    public float Damage => DamageModifier == null ? baseDamage : DamageModifier.Modify(baseDamage);
 
-    public float DamageMultiplier { get; set; } = 1f;
-    public float Damage => baseDamage * DamageMultiplier;
+    private void Start()
+    {
+        if (DamageModifier == null)
+        {
+            DamageModifier = new DamageModifier();
+        }
+    }
 
     private void HandleCollision(GameObject other)
     {

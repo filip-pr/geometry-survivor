@@ -8,7 +8,7 @@ public class EnemyExperienceDropDeathHandler : DeathHandler
     {
         if (experiencePrefab != null)
         {
-            Instantiate(experiencePrefab, transform.position, Quaternion.identity);
+            Instantiate(experiencePrefab, transform.position, Quaternion.identity, transform);
         }
         base.HandleDeath();
     }
