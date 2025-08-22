@@ -6,6 +6,7 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     [field: SerializeField] public Transform GenerationCenter { get; set; }
+    [field: SerializeField] public Transform MapTilesParent { get; private set; }
     [field: SerializeField] public float GenerationDistance { get; set; } = 10;
     [field: SerializeField] public float DestroyDistance { get; set; } = float.PositiveInfinity;
 
@@ -65,7 +66,7 @@ public class MapManager : MonoBehaviour
     {
         if (!mapTiles.ContainsKey(position))
         {
-            GameObject newTile = Instantiate(mapTilePrefab, new Vector2(transform.position.x, transform.position.y) + position * mapTileSize, Quaternion.identity, transform);
+            GameObject newTile = Instantiate(mapTilePrefab, (Vector2)MapTilesParent.transform.position + position * mapTileSize, Quaternion.identity, MapTilesParent);
             AddStructures(newTile);
             mapTiles[position] = newTile;
         }
@@ -114,8 +115,8 @@ public class MapManager : MonoBehaviour
             newMapTiles[newPosition] = tile.Value;
         }
         mapTiles = newMapTiles;
-
     }
+
     private void Update()
     {
 

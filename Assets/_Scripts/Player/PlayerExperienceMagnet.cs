@@ -1,25 +1,35 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
+[RequireComponent(typeof(CircleCollider2D))]
 public class PlayerExperienceMagnet : MonoBehaviour
 {
     [SerializeField] private PlayerLevel playerLevel;
-    [SerializeField] private float magnetRange = 2f;
 
+    [SerializeField] private float baseRange = 2f;
+
+    [SerializeField] public StatModifier RangeModifier { get; set; }
+
+    public float Range => RangeModifier == null ? baseRange : RangeModifier.Modify(baseRange);
+    private float MagnetPullSpeed => Range * 5f;
+
+    private CircleCollider2D magnetCollider;
     private HashSet<GameObject> experienceInRange = new();
-    private float MagnetRange
+
+    private void Start()
     {
-        get { return magnetRange; }
-        set
+        magnetCollider = GetComponent<CircleCollider2D>();
+
+        PlayerStats playerStats = GetComponentInParent<PlayerStats>();
+        if (playerStats == null)
         {
-            if (TryGetComponent<CircleCollider2D>(out var collider))
-            {
-                collider.radius = value;
-            }
-            magnetRange = value;
+            Debug.LogError("PlayerExperienceMagnet could not find PlayerStats component in parent.");
+        }
+        else
+        {
+            RangeModifier = playerStats.ExperienceMagnetRangeModifier;
         }
     }
-    private float MagnetPullSpeed => MagnetRange * 5f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -30,9 +40,9 @@ public class PlayerExperienceMagnet : MonoBehaviour
         }
     }
 
-    private void OnValidate()
+    private void FixedUpdate()
     {
-        MagnetRange = magnetRange;
+        magnetCollider.radius = Range;
     }
 
     private void LateUpdate()

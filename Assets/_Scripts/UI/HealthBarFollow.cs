@@ -7,11 +7,6 @@ public class HealthBarFollow : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Target == null)
-        {
-            Destroy(gameObject);
-            return;
-        }
         transform.position = Target.position + offset;
     }
 }

@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 8748438679195514341}
   - component: {fileID: 2253078268532881415}
   - component: {fileID: 770192211896840526}
-  - component: {fileID: 3774580197794317398}
   - component: {fileID: 4551268800541730027}
+  - component: {fileID: 8424380451249327427}
   m_Layer: 0
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -105,7 +105,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.25
+  m_Mass: 0.125
   m_LinearDamping: 0
   m_AngularDamping: 1000000
   m_GravityScale: 0
@@ -178,9 +178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71bd4f427716ee348b2c401f7e944a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  knockbackResistance: 0
-  knockbackDecayRate: 20
+  baseMovementSpeed: 3
+  baseKnockbackResistance: 0
+  baseKknockbackDecayRate: 20
   desiredDistanceMin: 0
   desiredDistanceMax: 0
   <Target>k__BackingField: {fileID: 0}
@@ -197,21 +197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseDamage: 1
---- !u!114 &3774580197794317398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3959644142728701306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c982654228490c43a1c0046ee687105, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHeath: 100
-  currentHealth: 0
-  healthBarPrefab: {fileID: 8624029345614730195, guid: 3a8df56b0bdec1948bff774b3679c961, type: 3}
 --- !u!114 &4551268800541730027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,4 +209,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7c73fe4a6a1d844a03dd7850040c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseMaxHeath: 100
+  baseHealthRegen: 0
+  currentHealth: 0
+  healthBarPrefab: {fileID: 8624029345614730195, guid: 3a8df56b0bdec1948bff774b3679c961, type: 3}
+  experiencePrefab: {fileID: 7201496818743374038, guid: 26b1934815a4f00448b2667a9ce01c4c, type: 3}
+--- !u!114 &8424380451249327427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3959644142728701306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7c73fe4a6a1d844a03dd7850040c5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseMaxHeath: 100
+  baseHealthRegen: 1
+  currentHealth: 0
+  healthBarPrefab: {fileID: 8624029345614730195, guid: 3a8df56b0bdec1948bff774b3679c961, type: 3}
   experiencePrefab: {fileID: 7201496818743374038, guid: 26b1934815a4f00448b2667a9ce01c4c, type: 3}

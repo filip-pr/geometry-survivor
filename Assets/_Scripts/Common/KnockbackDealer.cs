@@ -1,12 +1,13 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class KnockbackDealer : MonoBehaviour
 {
     [SerializeField] private float baseKnockback = 20f;
 
-    public float KnockbackMultiplier { get; set; } = 1f;
+    public StatModifier KnockbackModifier { get; set; }
 
-    public float Knockback => baseKnockback * KnockbackMultiplier;
+    public float Knockback => KnockbackModifier == null ? baseKnockback : KnockbackModifier.Modify(baseKnockback);
 
     private void HandleCollision(GameObject other)
     {
@@ -25,6 +26,5 @@ public class KnockbackDealer : MonoBehaviour
     {
         HandleCollision(collider.gameObject);
     }
-
 
 }

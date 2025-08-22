@@ -1,16 +1,20 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class DamageDealer : MonoBehaviour
 {
     [SerializeField] private float baseDamage = 0.2f;
-    public DamageModifier DamageModifier { get; set; }
+
+    public StatModifier DamageModifier { get; set; }
+
     public float Damage => DamageModifier == null ? baseDamage : DamageModifier.Modify(baseDamage);
 
-    private void Start()
+
+    protected virtual void Start()
     {
         if (DamageModifier == null)
         {
-            DamageModifier = new DamageModifier();
+            DamageModifier = new StatModifier();
         }
     }
 

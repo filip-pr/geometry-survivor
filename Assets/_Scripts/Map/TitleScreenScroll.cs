@@ -4,11 +4,19 @@ public class TitleScreenScroll : MonoBehaviour
 {
     [SerializeField] private Vector3 scrollSpeed = new Vector3(1f, 0f, 0f);
 
-    [SerializeField] private GameObject scrollTarget;
+    private Transform scrollTarget;
+    private Transform mapTilesParent;
+
+    public void OnEnable()
+    {
+        MapManager mapManager = GetComponent<MapManager>();
+        scrollTarget = mapManager.GenerationCenter;
+        mapTilesParent = mapManager.MapTilesParent;
+    }
 
     private void LateUpdate()
     {
-        transform.position += scrollSpeed * Time.deltaTime;
-        scrollTarget.transform.position -= scrollSpeed * Time.deltaTime;
+        mapTilesParent.position += scrollSpeed * Time.deltaTime;
+        scrollTarget.position -= scrollSpeed * Time.deltaTime;
     }
 }
