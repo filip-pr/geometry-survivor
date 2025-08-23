@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2901251942492961662}
   m_Layer: 0
   m_Name: SpinnerBladeItem
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,4 +45,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinnerBladePrefab: {fileID: 6063251402741825420, guid: 85fac71481e168c4da8b30546fe55c0e, type: 3}
-  spinnerBlades: []

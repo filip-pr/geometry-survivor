@@ -11,6 +11,10 @@ public class KnockbackDealer : MonoBehaviour
 
     private void HandleCollision(GameObject other)
     {
+        if (gameObject.tag == other.tag)
+        {
+            return;
+        }
         if (other.TryGetComponent<MovementController>(out var movementController))
         {
             movementController.Push(other.transform.position - transform.position, Knockback);

@@ -4,11 +4,12 @@ using System.Collections.Generic;
 public class PlayerInventory : MonoBehaviour
 {
     private const int maxItems = 5;
+    public Transform ProjectileParent { get; set; }
 
     [SerializeField] private PlayerItemData[] allItemsData;
 
     [SerializeField] private List<GameObject> heldItems = new();
-
+    
     private bool IsFull => heldItems.Count >= maxItems;
 
     private void Start()
@@ -19,6 +20,7 @@ public class PlayerInventory : MonoBehaviour
     private void AddItem(PlayerItemData item)
     {
         GameObject itemInstance = Instantiate(item.ItemPrefab, transform);
+        itemInstance.GetComponent<PlayerItem>().ProjectileParent = ProjectileParent;
         heldItems.Add(itemInstance);
         item.ItemInstance = itemInstance;
     }

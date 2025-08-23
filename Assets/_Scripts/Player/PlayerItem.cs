@@ -6,6 +6,7 @@ public abstract class PlayerItem : MonoBehaviour
     public int Level { get; private set; } = 0;
     public abstract int MaxLevel { get; }
     public PlayerStats PlayerStats { get; set; }
+    public Transform ProjectileParent { get; set; }
     abstract protected void OnLevelUp();
 
     private void Start()

@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Transform titleScreen;
     [SerializeField] private Transform shopScreen;
+    [SerializeField] private Transform projectiles;
 
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject enemyManagerPrefab;
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
         player = Instantiate(playerPrefab, titleScreen.position, Quaternion.identity);
         player.GetComponent<Health>().SetupHealthBar(healthBarCanvas);
         player.GetComponent<PlayerLevel>().SetupLevelHUD(gameUICanvas);
+        player.GetComponent<PlayerInventory>().ProjectileParent = projectiles;
 
         enemyManager = Instantiate(enemyManagerPrefab);
         enemyManager.GetComponent<EnemyManager>().Target = player.transform;
