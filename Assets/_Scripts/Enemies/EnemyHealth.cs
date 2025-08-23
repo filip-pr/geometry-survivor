@@ -13,5 +13,4 @@ public class EnemyHealth : Health
             Destroy(gameObject);
         }
     }
-
 }

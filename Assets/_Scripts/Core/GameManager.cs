@@ -6,10 +6,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Canvas gameUICanvas;
     [SerializeField] private Canvas healthBarCanvas;
 
-    [SerializeField] private GameObject mapManager;
+    [SerializeField] private Transform titleScreen;
+    [SerializeField] private Transform shopScreen;
 
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private GameObject EnemyManagerPrefab;
+    [SerializeField] private GameObject enemyManagerPrefab;
     [SerializeField] private GameObject gameTimerPrefab;
 
     private GameObject player;
@@ -18,46 +19,71 @@ public class GameManager : MonoBehaviour
 
     public void ToTitleScreen()
     {
-        
-        if (player != null)
-        {
-            Destroy(player);
-        }
-        if (enemyManager != null)
-        {
-            Destroy(enemyManager);
-        }
-        gameUICanvas.gameObject.SetActive(false);
-        menuUICanvas.gameObject.SetActive(true);
-
-        Camera.main.GetComponent<CameraFollow>().Target = null;
-        Camera.main.transform.position = new Vector3(0, 0, -1);
+        Camera.main.GetComponent<CameraFollow>().Target = titleScreen;
     }
 
-    public void StartGame()
+    public void ToShop()
+    {
+        Camera.main.GetComponent<CameraFollow>().Target = shopScreen;
+    }
+
+    public void ToPlayer()
+    {
+        if (player != null)
+        {
+            Camera.main.GetComponent<CameraFollow>().Target = player.transform;
+        }
+    }
+
+    public void ExitApp()
+    {
+        Application.Quit();
+    }
+
+    private void ClearGame()
     {
         if (player != null)
         {
             Destroy(player);
         }
-        player = Instantiate(playerPrefab);
-        player.GetComponent<Health>().SetupHealthBar(healthBarCanvas);
-        player.GetComponent<PlayerLevel>().SetupLevelHUD(gameUICanvas);
-
         if (enemyManager != null)
         {
             Destroy(enemyManager);
         }
-        enemyManager = Instantiate(EnemyManagerPrefab);
-        enemyManager.GetComponent<EnemyManager>().Target = player.transform;
-        enemyManager.GetComponent<EnemyManager>().HealthBarCanvas = healthBarCanvas;
+        if (gameTimer != null)
+        {
+            Destroy(enemyManager);
+        }
+    }
+
+    public void StartGame()
+    {
+        ClearGame();
 
         gameUICanvas.gameObject.SetActive(true);
         menuUICanvas.gameObject.SetActive(false);
 
+        player = Instantiate(playerPrefab, titleScreen.position, Quaternion.identity);
+        player.GetComponent<Health>().SetupHealthBar(healthBarCanvas);
+        player.GetComponent<PlayerLevel>().SetupLevelHUD(gameUICanvas);
+
+        enemyManager = Instantiate(enemyManagerPrefab);
+        enemyManager.GetComponent<EnemyManager>().Target = player.transform;
+        enemyManager.GetComponent<EnemyManager>().HealthBarCanvas = healthBarCanvas;
+
         gameTimer = Instantiate(gameTimerPrefab, gameUICanvas.transform);
 
-        Camera.main.GetComponent<CameraFollow>().Target = player.transform;
+        ToPlayer();
+    }
+
+    public void EndGame()
+    {
+        ClearGame();
+
+        gameUICanvas.gameObject.SetActive(false);
+        menuUICanvas.gameObject.SetActive(true);
+
+        ToTitleScreen();
     }
 
     private void Start()

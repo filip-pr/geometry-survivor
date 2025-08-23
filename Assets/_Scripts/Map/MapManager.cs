@@ -1,19 +1,19 @@
 
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
     [field: SerializeField] public Transform GenerationCenter { get; set; }
-    [field: SerializeField] public Transform MapTilesParent { get; private set; }
-    [field: SerializeField] public float GenerationDistance { get; set; } = 10;
-    [field: SerializeField] public float DestroyDistance { get; set; } = float.PositiveInfinity;
+    [field: SerializeField] public float GenerationDistance { get; set; } = 30;
+    [field: SerializeField] public float DestroyDistance { get; set; } = 50;
 
     [SerializeField] private GameObject mapTilePrefab;
     [SerializeField] private MapStructureSpawnData[] structures;
     [SerializeField] private int structureSpawnTries = 20;
     [SerializeField] private float structureSpawnChance = 0.5f;
+
+    [SerializeField] private int seedOffset;
 
     private Vector2 mapTileSize;
     private Dictionary<Vector2Int, GameObject> mapTiles;
@@ -29,6 +29,7 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
+        seedOffset = Random.Range(0, int.MaxValue);
         mapTileSize = mapTilePrefab.GetComponent<SpriteRenderer>().size;
         mapTiles = new();
         generationCenterTile = GetMapTilePosition(GenerationCenter.position);
@@ -66,7 +67,8 @@ public class MapManager : MonoBehaviour
     {
         if (!mapTiles.ContainsKey(position))
         {
-            GameObject newTile = Instantiate(mapTilePrefab, (Vector2)MapTilesParent.transform.position + position * mapTileSize, Quaternion.identity, MapTilesParent);
+            GameObject newTile = Instantiate(mapTilePrefab, position * mapTileSize, Quaternion.identity, transform);
+            Random.InitState((position.x * 1000) + position.y + seedOffset);
             AddStructures(newTile);
             mapTiles[position] = newTile;
         }
@@ -91,8 +93,8 @@ public class MapManager : MonoBehaviour
         List<Vector2Int> tilesToDestroy = new List<Vector2Int>();
         foreach (var tile in mapTiles)
         {
-            Vector2 tileCoordinates = tile.Key * mapTileSize;
-            if (Vector2.Distance(tileCoordinates, GenerationCenter.position) > DestroyDistance)
+            Vector2 distance = (tile.Key * mapTileSize) - (Vector2)GenerationCenter.position;
+            if (Mathf.Max(Mathf.Abs(distance.x), Mathf.Abs(distance.y)) > DestroyDistance)
             {
                 tilesToDestroy.Add(tile.Key);
             }
@@ -104,19 +106,6 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    public void Recenter()
-    {
-        DestroyTiles();
-        Vector2Int tileOffset = generationCenterTile;
-        Dictionary<Vector2Int, GameObject> newMapTiles = new();
-        foreach (var tile in mapTiles)
-        {
-            Vector2Int newPosition = tile.Key - tileOffset;
-            newMapTiles[newPosition] = tile.Value;
-        }
-        mapTiles = newMapTiles;
-    }
-
     private void Update()
     {
 
@@ -125,10 +114,7 @@ public class MapManager : MonoBehaviour
         {
             generationCenterTile = newCenterTile;
             GenerateMapTiles();
-            if (!float.IsPositiveInfinity(DestroyDistance))
-            {
-                DestroyTiles();
-            }
+            DestroyTiles();
         }
     }
 }
