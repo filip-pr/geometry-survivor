@@ -1,10 +1,14 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInput))]
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Canvas menuUICanvas;
     [SerializeField] private Canvas gameUICanvas;
     [SerializeField] private Canvas healthBarCanvas;
+
+    
 
     [SerializeField] private Transform titleScreen;
     [SerializeField] private Transform shopScreen;
@@ -14,6 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject enemyManagerPrefab;
     [SerializeField] private GameObject gameTimerPrefab;
 
+
+    private PlayerInput playerInput;
     private GameObject player;
     private GameObject enemyManager;
     private GameObject gameTimer;
@@ -68,6 +74,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<Health>().SetupHealthBar(healthBarCanvas);
         player.GetComponent<PlayerLevel>().SetupLevelHUD(gameUICanvas);
         player.GetComponent<PlayerInventory>().ProjectileParent = projectiles;
+        player.GetComponent<PlayerController>().PlayerInput = playerInput;
 
         enemyManager = Instantiate(enemyManagerPrefab);
         enemyManager.GetComponent<EnemyManager>().Target = player.transform;
@@ -90,6 +97,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        playerInput = GetComponent<PlayerInput>();
         ToTitleScreen();
     }
 }

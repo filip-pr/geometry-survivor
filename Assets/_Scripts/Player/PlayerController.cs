@@ -6,19 +6,16 @@ public class PlayerController : MovementController
 {
     private Vector2 moveInput = Vector2.zero;
 
+    public PlayerInput PlayerInput { get; set; }
+
     protected override void Start()
     {
         movementSpeedModifier = gameObject.GetComponent<PlayerStats>().MovementSpeedModifier;
         base.Start();
     }
 
-    private void OnMove(InputValue value)
-    {
-        moveInput = value.Get<Vector2>();
-    }
-
     protected override Vector2 GetMovementDirection()
     {
-        return moveInput;
+        return PlayerInput.actions["Move"].ReadValue<Vector2>();
     }
 }
