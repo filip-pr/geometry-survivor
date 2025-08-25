@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -8,30 +10,73 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] private PlayerItemData[] allItemsData;
 
-    [SerializeField] private List<GameObject> heldItems = new();
-    
-    private bool IsFull => heldItems.Count >= maxItems;
+    [SerializeField] private int itemsHeld = 0;
+
+    [SerializeField] private GameObject itemSlotPrefab;
+    [SerializeField] private float itemSlotSpacing = 10f;
+    [SerializeField] private float itemSlotYPosition = -400f;
+
+    private List<GameObject> itemSlots = new();
+
+    private bool IsFull => itemsHeld >= maxItems;
 
     private void Start()
     {
         AddItem(allItemsData[0]);
     }
 
+    public void SetupItemSlots(Canvas canvas)
+    {
+        float itemSlotSize = itemSlotPrefab.GetComponent<RectTransform>().rect.width;
+        float totalWidth = itemSlotSize * maxItems;
+        float startX = -totalWidth / 2 + itemSlotSize / 2;
+        for (int i = 0; i < maxItems; i++)
+        {
+            GameObject itemSlotInstance = Instantiate(itemSlotPrefab, canvas.transform);
+            itemSlotInstance.transform.localPosition = new Vector3(startX, itemSlotYPosition, 0);
+            itemSlots.Add(itemSlotInstance);
+            startX += itemSlotSize + itemSlotSpacing;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var itemSlotInstance in itemSlots)
+        {
+            Destroy(itemSlotInstance);
+        }
+    }
+
+    private string GetItemLevelText(int level)
+    {
+        return $"Lvl: {level.ToString()}";
+    }
+
     private void AddItem(PlayerItemData item)
     {
         GameObject itemInstance = Instantiate(item.ItemPrefab, transform);
         itemInstance.GetComponent<PlayerItem>().ProjectileParent = ProjectileParent;
-        heldItems.Add(itemInstance);
         item.ItemInstance = itemInstance;
+        item.ItemSlot =  itemSlots[itemsHeld];
+
+        Transform itemSlotName = item.ItemSlot.transform.Find("ItemName");
+        itemSlotName.GetComponent<TextMeshProUGUI>().text = itemInstance.GetComponent<PlayerItem>().ItemName;
+        itemSlotName.GetComponent<TextMeshProUGUI>().enabled = true;
+
+        Transform itemSlotLevel = item.ItemSlot.transform.Find("ItemLevel");
+        itemSlotLevel.GetComponent<TextMeshProUGUI>().text = GetItemLevelText(itemInstance.GetComponent<PlayerItem>().Level);
+        itemSlotLevel.GetComponent<TextMeshProUGUI>().enabled = true;
+
+        itemsHeld++;
     }
 
-    public void AddOrUpgradeItem() // Should be prompting the player for choice of 3
+    public PlayerItemData AddOrUpgradeItem()
     {
-        PlayerItemData choice = WeightedRandom.Choose(allItemsData);
+        PlayerItemData randomChoice = WeightedRandom.Choose(allItemsData);
 
-        if (choice.ItemInstance == null)
+        if (randomChoice.ItemInstance == null)
         {
-            AddItem(choice);
+            AddItem(randomChoice);
             if (IsFull)
             {
                 foreach (PlayerItemData item in allItemsData)
@@ -45,12 +90,17 @@ public class PlayerInventory : MonoBehaviour
         }
         else
         {
-            PlayerItem item = choice.ItemInstance.GetComponent<PlayerItem>();
+            PlayerItem item = randomChoice.ItemInstance.GetComponent<PlayerItem>();
             item.LevelUp();
+
+            Transform itemSlotLevel = randomChoice.ItemSlot.transform.Find("ItemLevel");
+            itemSlotLevel.GetComponent<TextMeshProUGUI>().text = GetItemLevelText(randomChoice.ItemInstance.GetComponent<PlayerItem>().Level);
+
             if (item.Level >= item.MaxLevel)
             {
-                choice.DropWeight = 0f;
+                randomChoice.DropWeight = 0f;
             }
         }
+        return randomChoice;
     }
 }

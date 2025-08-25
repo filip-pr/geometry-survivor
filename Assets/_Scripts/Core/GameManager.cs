@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Canvas gameUICanvas;
     [SerializeField] private Canvas healthBarCanvas;
 
-    
-
     [SerializeField] private Transform titleScreen;
     [SerializeField] private Transform shopScreen;
     [SerializeField] private Transform projectiles;
@@ -59,8 +57,18 @@ public class GameManager : MonoBehaviour
         }
         if (gameTimer != null)
         {
-            Destroy(enemyManager);
+            Destroy(gameTimer);
         }
+        foreach (Transform child in projectiles)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    public void ReadyMainMenu()
+    {
+        gameUICanvas.gameObject.SetActive(false);
+        menuUICanvas.gameObject.SetActive(true);
     }
 
     public void StartGame()
@@ -74,6 +82,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<Health>().SetupHealthBar(healthBarCanvas);
         player.GetComponent<PlayerLevel>().SetupLevelHUD(gameUICanvas);
         player.GetComponent<PlayerInventory>().ProjectileParent = projectiles;
+        player.GetComponent<PlayerInventory>().SetupItemSlots(gameUICanvas);
         player.GetComponent<PlayerController>().PlayerInput = playerInput;
 
         enemyManager = Instantiate(enemyManagerPrefab);
@@ -88,16 +97,14 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         ClearGame();
-
-        gameUICanvas.gameObject.SetActive(false);
-        menuUICanvas.gameObject.SetActive(true);
-
+        ReadyMainMenu();
         ToTitleScreen();
     }
 
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
+        ReadyMainMenu();
         ToTitleScreen();
     }
 }

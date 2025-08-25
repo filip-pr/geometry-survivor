@@ -2,14 +2,14 @@ using UnityEngine;
 
 public abstract class PlayerItem : MonoBehaviour
 {
-    public Sprite Sprite { get; }
+    abstract public string ItemName { get; }
     public int Level { get; private set; } = 0;
     public abstract int MaxLevel { get; }
     public PlayerStats PlayerStats { get; set; }
     public Transform ProjectileParent { get; set; }
     abstract protected void OnLevelUp();
 
-    private void Start()
+    private void Awake()
     {
         PlayerStats playerStats = GetComponentInParent<PlayerStats>();
         if (playerStats == null)

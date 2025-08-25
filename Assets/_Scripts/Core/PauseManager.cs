@@ -25,6 +25,11 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
     }
 
+    private void OnDisable()
+    {
+        ResumeGame();
+    }
+
     private void Update()
     {
         if (playerInput.actions["Pause"].triggered)

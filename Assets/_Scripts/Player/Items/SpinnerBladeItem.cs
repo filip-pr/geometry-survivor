@@ -7,7 +7,7 @@ public class SpinnerBladeItem : PlayerItem
 
     [SerializeField] private GameObject spinnerBladePrefab;
 
-
+    public override string ItemName => "Spinner Blade";
     private void AddBlade(float offset)
     {
         GameObject newBlade = Instantiate(spinnerBladePrefab, ProjectileParent);

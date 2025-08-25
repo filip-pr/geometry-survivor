@@ -286,6 +286,9 @@ MonoBehaviour:
   - <ItemPrefab>k__BackingField: {fileID: 7601290210769955435, guid: dd625625dc9c25840ac1fdb87b2f0c03, type: 3}
     <DropWeight>k__BackingField: 10
   heldItems: []
+  itemSlotPrefab: {fileID: 7032004040784506015, guid: 09c59efbe68ee0842a04b937cb17829f, type: 3}
+  itemSlotSpacing: 1
+  itemSlotYPosition: -400
 --- !u!114 &3654439323212812837
 MonoBehaviour:
   m_ObjectHideFlags: 0

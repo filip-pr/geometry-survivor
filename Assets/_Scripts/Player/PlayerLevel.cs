@@ -44,14 +44,9 @@ public class PlayerLevel : MonoBehaviour
 
     private void OnLevelUp()
     {
-        if (TryGetComponent<Health>(out var health))
-        {
-            health.Heal(health.MaxHeath);
-        }
-        if (TryGetComponent <PlayerInventory>(out var inventory))
-        {
-            inventory.AddOrUpgradeItem();
-        }
+        GetComponent<Health>().Heal(float.PositiveInfinity);
+        PlayerItemData levelUpItem = GetComponent<PlayerInventory>().AddOrUpgradeItem();
+        
         levelText.text = LevelText;
         experienceBar.maxValue = ExperienceNeeded;
     }

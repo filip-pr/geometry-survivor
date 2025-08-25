@@ -11,11 +11,5 @@ public class PlayerStats : MonoBehaviour
     [field: SerializeField] public StatModifier AttackSpeedModifier { get; private set; } = new StatModifier();
     [field: SerializeField] public StatModifier ExperienceGainModifier { get; private set ; } = new StatModifier();
     [field: SerializeField] public StatModifier ExperienceMagnetRangeModifier { get; private set; } = new StatModifier();
-
-    private void Update()
-    {
-        MovementSpeedModifier.IncreaseMultiplier(0.01f * Time.deltaTime);
-    }
-
 }
 
