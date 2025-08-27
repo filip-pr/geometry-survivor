@@ -70,7 +70,7 @@ public class PlayerInventory : MonoBehaviour
         itemsHeld++;
     }
 
-    public PlayerItemData AddOrUpgradeItem()
+    public PlayerItem AddOrUpgradeItem()
     {
         PlayerItemData randomChoice = WeightedRandom.Choose(allItemsData);
 
@@ -101,6 +101,6 @@ public class PlayerInventory : MonoBehaviour
                 randomChoice.DropWeight = 0f;
             }
         }
-        return randomChoice;
+        return randomChoice.ItemInstance.GetComponent<PlayerItem>();
     }
 }
