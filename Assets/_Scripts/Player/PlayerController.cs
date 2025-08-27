@@ -10,7 +10,7 @@ public class PlayerController : MovementController
 
     protected override void Start()
     {
-        movementSpeedModifier = gameObject.GetComponent<PlayerStats>().MovementSpeedModifier;
+        MovementSpeedModifier = gameObject.GetComponent<PlayerStats>().MovementSpeedModifier;
         base.Start();
     }
 

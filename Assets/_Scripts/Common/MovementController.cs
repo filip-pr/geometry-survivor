@@ -7,13 +7,13 @@ public abstract class MovementController : MonoBehaviour
     [SerializeField] protected float baseKnockbackResistance = 0f;
     [SerializeField] protected float baseKnockbackDecayRate = 20f;
 
-    public StatModifier movementSpeedModifier { get; set; }
-    public StatModifier knockbackResistanceModifier { get; set; }
-    public StatModifier knockbackDecayRateModifier { get; set; }
-
-    public float MovementSpeed => movementSpeedModifier == null ? baseMovementSpeed : movementSpeedModifier.Modify(baseMovementSpeed);
-    public float knockbackResistance => knockbackResistanceModifier == null ? baseKnockbackResistance : knockbackResistanceModifier.Modify(baseKnockbackResistance);
-    public float knockbackDecayRate => knockbackDecayRateModifier == null ? baseKnockbackDecayRate : knockbackDecayRateModifier.Modify(baseKnockbackDecayRate);
+    public StatModifier MovementSpeedModifier { get; set; }
+    public StatModifier KnockbackResistanceModifier { get; set; }
+    public StatModifier KnockbackDecayRateModifier { get; set; }
+    public bool IsGhosting { get; set; } = false;
+    public float MovementSpeed => MovementSpeedModifier == null ? baseMovementSpeed : MovementSpeedModifier.Modify(baseMovementSpeed);
+    public float knockbackResistance => KnockbackResistanceModifier == null ? baseKnockbackResistance : KnockbackResistanceModifier.Modify(baseKnockbackResistance);
+    public float knockbackDecayRate => KnockbackDecayRateModifier == null ? baseKnockbackDecayRate : KnockbackDecayRateModifier.Modify(baseKnockbackDecayRate);
 
 
     private Vector2 knockbackVelocity = Vector2.zero;
@@ -41,16 +41,28 @@ public abstract class MovementController : MonoBehaviour
         }
     }
 
+    private void UpdateVelocity(Vector2 amount)
+    {
+        if (IsGhosting)
+        {
+            transform.position += (Vector3)(amount*Time.deltaTime);
+        }
+        else
+        {
+            rigidBody.linearVelocity = amount;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (knockbackVelocity.magnitude >= 0.01f)
         {
             knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, knockbackDecayRate * Time.fixedDeltaTime);
-            rigidBody.linearVelocity = knockbackVelocity;
+            UpdateVelocity(knockbackVelocity);
         }
         else
         {
-            rigidBody.linearVelocity = MovementSpeed * GetMovementDirection().normalized;
+            UpdateVelocity(MovementSpeed * GetMovementDirection().normalized);
             UpdateRotation();
         }
     }

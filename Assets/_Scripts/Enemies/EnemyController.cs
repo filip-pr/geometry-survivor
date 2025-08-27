@@ -2,19 +2,13 @@ using UnityEngine;
 
 public class EnemyController : MovementController
 {
-
-    [SerializeField] private float desiredDistanceMin = 0f;
-    [SerializeField] private float desiredDistanceMax = 0.1f;
     [field: SerializeField] public Transform Target { get; set; }
 
-    private float TargetDistance
-    {
-        get
-        {
-            if (Target == null) return 0f;
-            return Vector2.Distance(rigidBody.position, Target.position);
-        }
-    }
+    [SerializeField] private float ghostTimeThreshold = 60f;
+    [SerializeField] private float speedIncreaseThreshold = 120f;
+    [SerializeField] private float speedIncreaseAmmount = 0.05f;
+
+    private float timeAlive = 0f;
 
     protected override void UpdateRotation()
     {
@@ -28,18 +22,19 @@ public class EnemyController : MovementController
     protected override Vector2 GetMovementDirection()
     {
         if (Target == null) return Vector2.zero;
+        return (rigidBody.position - (Vector2)Target.position);
+    }
 
-        if (TargetDistance < desiredDistanceMin)
+    private void Update()
+    {
+        timeAlive += Time.deltaTime;
+        if (timeAlive > ghostTimeThreshold)
         {
-            return (rigidBody.position - (Vector2)Target.position);
+            IsGhosting = true;
         }
-        else if (TargetDistance > desiredDistanceMax)
+        if (timeAlive > speedIncreaseThreshold)
         {
-            return ((Vector2)Target.position - rigidBody.position);
-        }
-        else
-        {
-            return Vector2.zero;
+            MovementSpeedModifier.IncreaseFlat(speedIncreaseAmmount * Time.deltaTime);
         }
     }
 }
