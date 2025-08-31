@@ -15,9 +15,8 @@ GameObject:
   - component: {fileID: 2253078268532881415}
   - component: {fileID: 770192211896840526}
   - component: {fileID: 4551268800541730027}
-  - component: {fileID: 8424380451249327427}
   m_Layer: 0
-  m_Name: MeleeEnemy
+  m_Name: HugeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,9 +80,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 7482667652216324306, guid: d7e8f00764a96cd4bba3c1a0e25d3f95, type: 3}
-  m_Color: {r: 0.8867924, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.81057835, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -178,12 +177,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71bd4f427716ee348b2c401f7e944a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMovementSpeed: 3
-  baseKnockbackResistance: 0
-  baseKknockbackDecayRate: 20
-  desiredDistanceMin: 0
-  desiredDistanceMax: 0
+  baseMovementSpeed: 1
+  baseKnockbackResistance: 0.9
+  baseKnockbackDecayRate: 20
   <Target>k__BackingField: {fileID: 0}
+  ghostTimeThreshold: 0
+  speedIncreaseThreshold: 240
+  speedIncreaseAmmount: 0.01
 --- !u!114 &770192211896840526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d029d0e26cc8a942b30b2bfad3dc6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 1
+  baseDamage: 20
 --- !u!114 &4551268800541730027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,25 +209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7c73fe4a6a1d844a03dd7850040c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHeath: 100
+  baseMaxHeath: 2000
   baseHealthRegen: 0
   currentHealth: 0
   healthBarPrefab: {fileID: 8624029345614730195, guid: 3a8df56b0bdec1948bff774b3679c961, type: 3}
-  experiencePrefab: {fileID: 7201496818743374038, guid: 26b1934815a4f00448b2667a9ce01c4c, type: 3}
---- !u!114 &8424380451249327427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3959644142728701306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df7c73fe4a6a1d844a03dd7850040c5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseMaxHeath: 100
-  baseHealthRegen: 1
-  currentHealth: 0
-  healthBarPrefab: {fileID: 8624029345614730195, guid: 3a8df56b0bdec1948bff774b3679c961, type: 3}
-  experiencePrefab: {fileID: 7201496818743374038, guid: 26b1934815a4f00448b2667a9ce01c4c, type: 3}
+  experiencePrefab: {fileID: 7201496818743374038, guid: 5a52924b7177a154ca66d551efd4c9ed, type: 3}

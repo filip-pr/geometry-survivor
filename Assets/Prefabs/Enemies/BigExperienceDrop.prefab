@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -5360819558456068350}
   - component: {fileID: -3137897414490134954}
   m_Layer: 0
-  m_Name: ExperienceDrop
+  m_Name: BigExperienceDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.636, y: -0.445, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 3625043607559282579, guid: 21fc97ad98001d04899089af3bda1e9d, type: 3}
-  m_Color: {r: 1, g: 0.95593417, b: 0.514151, a: 1}
+  m_Color: {r: 0.53978187, g: 0.5137255, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,7 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcbffa6c165e8364681815dd245d33f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Experience>k__BackingField: 5
+  lifeDuration: 60
+  <Experience>k__BackingField: 25
 --- !u!60 &-3137897414490134954
 PolygonCollider2D:
   m_ObjectHideFlags: 0

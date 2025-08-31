@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 349e1bcfb1d3fb741bbd1c67320d1c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  <Level>k__BackingField: 1
   experience: 0
   levelTextPrefab: {fileID: 6063249515025191492, guid: 8f5b4d4176df4764e853ab66fdde9d41, type: 3}
   experienceBarPrefab: {fileID: 6070679838886899114, guid: 0b27556ce99b7a747929228b01203f2a, type: 3}
@@ -333,9 +333,6 @@ MonoBehaviour:
   <KnockbackModifier>k__BackingField:
     multiplier: 1
     flatIncrease: 0
-  <AttackSpeedModifier>k__BackingField:
-    multiplier: 1
-    flatIncrease: 0
   <ExperienceGainModifier>k__BackingField:
     multiplier: 1
     flatIncrease: 0
@@ -354,7 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 151f25cb50eb8cf41b45143e03f2b76a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHeath: 1000
-  baseHealthRegen: 1
+  baseMaxHeath: 100
+  baseHealthRegen: 5
   currentHealth: 0
   healthBarPrefab: {fileID: 7792903790760758319, guid: 779e250f04d62b04e9db8ba0c8ab0198, type: 3}

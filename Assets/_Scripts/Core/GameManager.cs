@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
         menuUICanvas.gameObject.SetActive(false);
 
         player = Instantiate(playerPrefab, titleScreen.position, Quaternion.identity);
+        player.GetComponent<PlayerStats>().SetUpgradeModifiers(upgradeManager);
         player.GetComponent<Health>().SetupHealthBar(healthBarCanvas);
         player.GetComponent<PlayerLevel>().SetupLevelHUD(gameUICanvas);
         player.GetComponent<PlayerInventory>().ProjectileParent = projectiles;

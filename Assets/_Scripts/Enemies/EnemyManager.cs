@@ -21,10 +21,13 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float enemyHealthIncreaseRate = 5f;
     [SerializeField] private float enemyDamageIncreaseRate = 5f;
 
+    [SerializeField] private float maxSpawnRate = 0.5f;
+
     private StatModifier enemyHealthModifier = new StatModifier();
     private StatModifier enemyDamageModifier = new StatModifier();
 
     private float runTime = 0f;
+    private float lastSpawnTime = 0f;
     private int wavesSpawned = 0;
 
     private float SpawnPointsGainRate => spawnPointMultiplier * (1 + runTime / 60f);
@@ -54,10 +57,12 @@ public class EnemyManager : MonoBehaviour
 
     private void TrySpawnRandomEnemy()
     {
+        if (runTime - lastSpawnTime < maxSpawnRate) return;
         EnemySpawnData spawnedEnemyData = WeightedRandom.Choose(enemies);
         if (spawnedEnemyData.SpawnPointCost > nonWaveSpawnPoints) return;
         SpawnEnemy(spawnedEnemyData);
         nonWaveSpawnPoints -= spawnedEnemyData.SpawnPointCost;
+        lastSpawnTime = runTime;
     }
 
     private void Update()

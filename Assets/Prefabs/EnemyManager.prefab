@@ -46,10 +46,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Target>k__BackingField: {fileID: 0}
   <HealthBarCanvas>k__BackingField: {fileID: 0}
-  minSpawnDistance: 15
-  maxSpawnDistance: 20
+  minSpawnDistance: 30
+  maxSpawnDistance: 40
   enemies:
+  - <EnemyPrefab>k__BackingField: {fileID: 3959644142728701306, guid: 4e33dcc613db0604abb1cdeb074b8422, type: 3}
+    <SpawnWeight>k__BackingField: 5
+    <SpawnPointCost>k__BackingField: 7
   - <EnemyPrefab>k__BackingField: {fileID: 3959644142728701306, guid: 7e3bc023933553948869f92791f98f09, type: 3}
     <SpawnWeight>k__BackingField: 10
+    <SpawnPointCost>k__BackingField: 5
+  - <EnemyPrefab>k__BackingField: {fileID: 3959644142728701306, guid: 7e96429e6ffa31949b95a1e97c02f985, type: 3}
+    <SpawnWeight>k__BackingField: 7
     <SpawnPointCost>k__BackingField: 10
-  spawnPoints: 10
+  - <EnemyPrefab>k__BackingField: {fileID: 3959644142728701306, guid: 88eef8cab96ff67449e41946c7d13e03, type: 3}
+    <SpawnWeight>k__BackingField: 5
+    <SpawnPointCost>k__BackingField: 25
+  - <EnemyPrefab>k__BackingField: {fileID: 3959644142728701306, guid: 88eef8cab96ff67449e41946c7d13e03, type: 3}
+    <SpawnWeight>k__BackingField: 2
+    <SpawnPointCost>k__BackingField: 100
+  nonWaveSpawnPoints: 0
+  waveSpawnPoints: 0
+  waveSpawnPointRatio: 0.7
+  spawnPointMultiplier: 10
+  waveInterval: 30
+  enemyHealthIncreaseRate: 10
+  enemyDamageIncreaseRate: 5
+  maxSpawnRate: 0.5
