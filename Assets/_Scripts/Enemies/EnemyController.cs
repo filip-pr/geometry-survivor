@@ -22,7 +22,7 @@ public class EnemyController : MovementController
     protected override Vector2 GetMovementDirection()
     {
         if (Target == null) return Vector2.zero;
-        return (rigidBody.position - (Vector2)Target.position);
+        return ((Vector2)Target.position- rigidBody.position);
     }
 
     private void Update()

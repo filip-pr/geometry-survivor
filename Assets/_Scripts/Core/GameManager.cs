@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject enemyManagerPrefab;
     [SerializeField] private GameObject gameTimerPrefab;
 
+    [SerializeField] private UpgradeManager upgradeManager;
+    [SerializeField] private int baseLevelUpgradePoints = 50;
+    [SerializeField] private int baseTimeSurvivedUpgradePoints = 50;
 
     private PlayerInput playerInput;
     private GameObject player;
@@ -94,8 +97,24 @@ public class GameManager : MonoBehaviour
         ToPlayer();
     }
 
+    private int CalculateUpgradePointsGain()
+    {
+        if (player == null) return 0;
+        if (gameTimer == null) return 0;
+
+        int levelsGained = player.GetComponent<PlayerLevel>().Level - 1;
+        int minutesSurvived = Mathf.FloorToInt(gameTimer.GetComponent<Timer>().TimeElapsed / 60f);
+
+        int levelGain = levelsGained * (baseLevelUpgradePoints * (levelsGained + 1)) / 2;
+        int timeGain = minutesSurvived * (baseTimeSurvivedUpgradePoints * (minutesSurvived + 1)) / 2;
+
+        return levelGain + timeGain;
+    }
+
     public void EndGame()
     {
+        int upgradePointsGained = CalculateUpgradePointsGain();
+        upgradeManager.AddUpgradePoints(upgradePointsGained);
         ClearGame();
         ReadyMainMenu();
         ToTitleScreen();

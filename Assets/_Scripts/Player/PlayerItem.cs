@@ -3,10 +3,10 @@ using UnityEngine;
 public abstract class PlayerItem : MonoBehaviour
 {
     abstract public string ItemName { get; }
-    public int Level { get; private set; } = 0;
+    public int Level { get; private set; } = 1;
     public abstract int MaxLevel { get; }
     public PlayerStats PlayerStats { get; set; }
-    public Transform ProjectileParent { get; set; }
+    [field: SerializeField] public Transform ProjectileParent { get; set; }
     abstract protected void OnLevelUp();
 
     private void Awake()
@@ -20,7 +20,11 @@ public abstract class PlayerItem : MonoBehaviour
         {
             PlayerStats = playerStats;
         }
-        LevelUp();
+    }
+
+    private void Start()
+    {
+        OnLevelUp();
     }
 
     public void LevelUp()

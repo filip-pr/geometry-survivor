@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlayerStats))]
 public class PlayerLevel : MonoBehaviour
 {
-    [SerializeField] private int level = 1;
+    [field: SerializeField] public int Level { get; private set; } = 1;
     [SerializeField] private float experience = 0f;
     public StatModifier ExperienceGainModifier { get; }
 
@@ -17,9 +17,9 @@ public class PlayerLevel : MonoBehaviour
     private Slider experienceBar;
     private GameObject levelUpPopoup;
 
-    private float ExperienceNeeded => level * 100f;
+    private float ExperienceNeeded => Level * 100f;
 
-    private string LevelText => $"Lvl: {level}";
+    private string LevelText => $"Lvl: {Level}";
 
     public void SetupLevelHUD(Canvas canvas)
     {
@@ -83,7 +83,7 @@ public class PlayerLevel : MonoBehaviour
         while (experience >= ExperienceNeeded)
         {
             experience -= ExperienceNeeded;
-            level++;
+            Level++;
             OnLevelUp();
         }
         experienceBar.value = experience;
