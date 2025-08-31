@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UpgradeHandler : MonoBehaviour
 {
-    [SerializeField] private string upgradeName;
+    [field: SerializeField] public string UpgradeName { get; private set; }
     [SerializeField] private int baseUpgradeCost = 1000;
 
     [SerializeField] private float upgradeIncreaseStep = 10f;
@@ -19,7 +19,7 @@ public class UpgradeHandler : MonoBehaviour
     private int maxUpgradeLevel = 10;
     private int upgradeLevel;
 
-    private float UpgradeAmount => upgradeIncreaseStep * upgradeLevel;
+    public float UpgradeAmount => upgradeIncreaseStep * upgradeLevel;
     private int NextUpgradeCost => baseUpgradeCost * (upgradeLevel + upgradeIncrease + 1);
     private int CurrentUpgradeCost => baseUpgradeCost * (upgradeLevel + upgradeIncrease);
 
@@ -40,14 +40,14 @@ public class UpgradeHandler : MonoBehaviour
 
     private void Awake()
     {
-        upgradeLevel = PlayerPrefs.GetInt(upgradeName, 0);
+        upgradeLevel = PlayerPrefs.GetInt(UpgradeName, 0);
     }
 
     public void ConfirmUpgradeIncrease()
     {
         upgradeLevel += upgradeIncrease;
         upgradeIncrease = 0;
-        PlayerPrefs.SetInt(upgradeName, upgradeLevel);
+        PlayerPrefs.SetInt(UpgradeName, upgradeLevel);
     }
 
     public void CancelUpgradeIncrease()

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Transform titleScreen;
     [SerializeField] private Transform shopScreen;
+    [SerializeField] private Transform upgradePointsEndScreen;
     [SerializeField] private Transform projectiles;
 
     [SerializeField] private GameObject playerPrefab;
@@ -33,6 +35,11 @@ public class GameManager : MonoBehaviour
     public void ToShop()
     {
         Camera.main.GetComponent<CameraFollow>().Target = shopScreen;
+    }
+
+    public void ToUpgradePointsEndScreen()
+    {
+        Camera.main.GetComponent<CameraFollow>().Target = upgradePointsEndScreen;
     }
 
     public void ToPlayer()
@@ -97,27 +104,30 @@ public class GameManager : MonoBehaviour
         ToPlayer();
     }
 
-    private int CalculateUpgradePointsGain()
+    private void UpdateUpgradePoints()
     {
-        if (player == null) return 0;
-        if (gameTimer == null) return 0;
-
         int levelsGained = player.GetComponent<PlayerLevel>().Level - 1;
         int minutesSurvived = Mathf.FloorToInt(gameTimer.GetComponent<Timer>().TimeElapsed / 60f);
 
         int levelGain = levelsGained * (baseLevelUpgradePoints * (levelsGained + 1)) / 2;
         int timeGain = minutesSurvived * (baseTimeSurvivedUpgradePoints * (minutesSurvived + 1)) / 2;
+        int total = levelGain + timeGain;
 
-        return levelGain + timeGain;
+        StatModifier upgradePointsModifier = new StatModifier();
+        upgradePointsModifier.IncreaseMultiplier(upgradeManager.GetUpgradeHandler("UpgradePointsGainUpgrade").UpgradeAmount / 100f);
+        
+        int totalWithBonus = Mathf.CeilToInt(upgradePointsModifier.Modify(total));
+        
+        upgradePointsEndScreen.Find("UpgradePointsGainText").GetComponent<TextMeshProUGUI>().text = $"{timeGain}\n{levelGain}\n{totalWithBonus-total}\n{totalWithBonus}";
+        upgradeManager.AddUpgradePoints(totalWithBonus);
     }
 
     public void EndGame()
     {
-        int upgradePointsGained = CalculateUpgradePointsGain();
-        upgradeManager.AddUpgradePoints(upgradePointsGained);
+        UpdateUpgradePoints();
         ClearGame();
         ReadyMainMenu();
-        ToTitleScreen();
+        ToUpgradePointsEndScreen();
     }
 
     private void Start()

@@ -52,6 +52,7 @@ public class UpgradeManager : MonoBehaviour
         upgradePoints -= upgradePointsHold;
         upgradePointsHold = 0;
         PlayerPrefs.SetInt(UpgradePointsKey, upgradePoints);
+        PlayerPrefs.Save();
         UpdateUI();
     }
 
@@ -78,8 +79,15 @@ public class UpgradeManager : MonoBehaviour
         PlayerPrefs.SetInt(UpgradePointsKey, upgradePoints);
     }
 
-    private void OnValidate()
+    public UpgradeHandler GetUpgradeHandler(string upgradeName)
     {
-        UpdateUI();
+        foreach (var upgradeHandler in upgradeHandlers)
+        {
+            if (upgradeHandler.UpgradeName == upgradeName)
+            {
+                return upgradeHandler;
+            }
+        }
+        return null;
     }
 }

@@ -73,7 +73,7 @@ public class PlayerInventory : MonoBehaviour
     public PlayerItem AddOrUpgradeItem()
     {
         PlayerItemData randomChoice = WeightedRandom.Choose(allItemsData);
-
+        if( randomChoice == null) return null;
         if (randomChoice.ItemInstance == null)
         {
             AddItem(randomChoice);
