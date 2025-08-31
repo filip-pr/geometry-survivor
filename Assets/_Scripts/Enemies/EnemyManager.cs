@@ -11,45 +11,61 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] private EnemySpawnData[] enemies;
 
-    [SerializeField] private int spawnPoints = 0;
+    [SerializeField] private float nonWaveSpawnPoints = 0;
+    [SerializeField] private float waveSpawnPoints = 0;
+    [SerializeField] private float waveSpawnPointRatio = 0.7f;
 
-    private void Start()
-    {
-        StartCoroutine(GatherSpawnPoints());
-    }
+    [SerializeField] private float spawnPointMultiplier = 10f;
+    [SerializeField] private float waveInterval = 30f;
 
-    private IEnumerator GatherSpawnPoints()
-    {
-        while (true)
-        {
-            spawnPoints += 2;
-            yield return new WaitForSeconds(1f);
-        }
-    }
+    [SerializeField] private float enemyHealthIncreaseRate = 5f;
+    [SerializeField] private float enemyDamageIncreaseRate = 5f;
 
-    private void SpawnEnemy()
+    private StatModifier enemyHealthModifier = new StatModifier();
+    private StatModifier enemyDamageModifier = new StatModifier();
+
+    private float runTime = 0f;
+    private int wavesSpawned = 0;
+
+    private float SpawnPointsGainRate => spawnPointMultiplier * (1 + runTime / 60f);
+
+    private void SpawnEnemy(EnemySpawnData enemyData)
     {
         Vector2 spawnPosition = Random.insideUnitCircle.normalized * Random.Range(minSpawnDistance, maxSpawnDistance);
         spawnPosition += (Vector2)Target.position;
+        GameObject enemy = Instantiate(enemyData.EnemyPrefab, spawnPosition, Quaternion.identity, transform);
+        enemy.GetComponent<Health>().SetupHealthBar(HealthBarCanvas);
+        enemy.GetComponent<EnemyController>().Target = Target;
+    }
+
+    private void TrySpawnWave()
+    {
+        if (wavesSpawned > runTime / waveInterval) return;
+        enemyHealthModifier.IncreaseMultiplier(enemyHealthIncreaseRate / 100f);
+        enemyDamageModifier.IncreaseMultiplier(enemyDamageIncreaseRate / 100f);
+        EnemySpawnData mainEnemyType = WeightedRandom.Choose(enemies);
+        while (waveSpawnPoints >= mainEnemyType.SpawnPointCost)
+        {
+            SpawnEnemy(mainEnemyType);
+            waveSpawnPoints -= mainEnemyType.SpawnPointCost;
+        }
+        wavesSpawned++;
+    }
+
+    private void TrySpawnRandomEnemy()
+    {
         EnemySpawnData spawnedEnemyData = WeightedRandom.Choose(enemies);
-        GameObject enemy = Instantiate(spawnedEnemyData.EnemyPrefab, spawnPosition, Quaternion.identity, transform);
-        if (enemy.TryGetComponent<Health>(out var enemyHealth))
-        {
-            enemyHealth.SetupHealthBar(HealthBarCanvas);
-        }
-        if (enemy.TryGetComponent<EnemyController>(out var enemyController))
-        {
-            enemyController.Target = Target;
-        }
-        spawnPoints -= spawnedEnemyData.SpawnPointCost;
+        if (spawnedEnemyData.SpawnPointCost > nonWaveSpawnPoints) return;
+        SpawnEnemy(spawnedEnemyData);
+        nonWaveSpawnPoints -= spawnedEnemyData.SpawnPointCost;
     }
 
     private void Update()
     {
-        if (spawnPoints > 20)
-        {
-            SpawnEnemy();
-            
-        }
+        runTime += Time.deltaTime;
+        waveSpawnPoints += SpawnPointsGainRate * Time.deltaTime * waveSpawnPointRatio;
+        nonWaveSpawnPoints += SpawnPointsGainRate * Time.deltaTime * (1 - waveSpawnPointRatio);
+        TrySpawnRandomEnemy();
+        TrySpawnWave();
     }
 }
