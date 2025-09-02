@@ -284,7 +284,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allItemsData:
   - <ItemPrefab>k__BackingField: {fileID: 7601290210769955435, guid: dd625625dc9c25840ac1fdb87b2f0c03, type: 3}
-    <DropWeight>k__BackingField: 10
+    <DropWeight>k__BackingField: 1
+  - <ItemPrefab>k__BackingField: {fileID: 6685151225837140142, guid: 9ae90ae025ce8254198437a94a7c9525, type: 3}
+    <DropWeight>k__BackingField: 1
+  - <ItemPrefab>k__BackingField: {fileID: 5539584887809003213, guid: 72fa266c10ee86d4584e2f9671b1a454, type: 3}
+    <DropWeight>k__BackingField: 1
+  - <ItemPrefab>k__BackingField: {fileID: 3099423869374815113, guid: 78132b336b34dab49b4612d663a984cd, type: 3}
+    <DropWeight>k__BackingField: 1
+  - <ItemPrefab>k__BackingField: {fileID: 1857472190195128784, guid: 7d06d87d4b567a249b7951c16c2a9ea2, type: 3}
+    <DropWeight>k__BackingField: 1
+  - <ItemPrefab>k__BackingField: {fileID: 1728602914622151154, guid: 4fd71f8fb8c4e9c4f8ed349ce4f84384, type: 3}
+    <DropWeight>k__BackingField: 1
+  - <ItemPrefab>k__BackingField: {fileID: 4798244232374036247, guid: 3cb87fa3a2298c643b71c28e3e5f99c0, type: 3}
+    <DropWeight>k__BackingField: 1
   itemsHeld: 0
   itemSlotPrefab: {fileID: 7032004040784506015, guid: 09c59efbe68ee0842a04b937cb17829f, type: 3}
   itemSlotSpacing: 1
@@ -303,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 1
   experience: 0
+  experienceRequiredMultiplier: 250
   levelTextPrefab: {fileID: 6063249515025191492, guid: 8f5b4d4176df4764e853ab66fdde9d41, type: 3}
   experienceBarPrefab: {fileID: 6070679838886899114, guid: 0b27556ce99b7a747929228b01203f2a, type: 3}
   levelUpPopoupPrefab: {fileID: 5932398651952745254, guid: 4fdeb318666aff24da7635b86aec5dea, type: 3}
@@ -352,6 +365,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMaxHeath: 100
-  baseHealthRegen: 5
+  baseHealthRegen: 2
   currentHealth: 0
   healthBarPrefab: {fileID: 7792903790760758319, guid: 779e250f04d62b04e9db8ba0c8ab0198, type: 3}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 
+[RequireComponent(typeof(PlayerStats))]
 public class PlayerInventory : MonoBehaviour
 {
     private const int maxItems = 5;
@@ -17,11 +18,13 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private float itemSlotYPosition = -400f;
 
     private List<GameObject> itemSlots = new();
+    private PlayerStats playerStats;
 
     private bool IsFull => itemsHeld >= maxItems;
 
     private void Start()
     {
+        playerStats = GetComponent<PlayerStats>();
         AddItem(allItemsData[0]);
     }
 
@@ -56,6 +59,8 @@ public class PlayerInventory : MonoBehaviour
     {
         GameObject itemInstance = Instantiate(item.ItemPrefab, transform);
         itemInstance.GetComponent<PlayerItem>().ProjectileParent = ProjectileParent;
+        itemInstance.GetComponent<PlayerItem>().SetupModifiers(playerStats);
+
         item.ItemInstance = itemInstance;
         item.ItemSlot =  itemSlots[itemsHeld];
 

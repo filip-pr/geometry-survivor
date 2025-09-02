@@ -22,6 +22,8 @@ public abstract class PlayerItem : MonoBehaviour
         }
     }
 
+    public abstract void SetupModifiers(PlayerStats playerStats);
+
     private void Start()
     {
         OnLevelUp();

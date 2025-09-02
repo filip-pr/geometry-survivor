@@ -7,6 +7,7 @@ public class PlayerLevel : MonoBehaviour
 {
     [field: SerializeField] public int Level { get; private set; } = 1;
     [SerializeField] private float experience = 0f;
+    [SerializeField] private float experienceRequiredMultiplier = 250f;
     public StatModifier ExperienceGainModifier { get; }
 
     [SerializeField] private GameObject levelTextPrefab;
@@ -17,7 +18,7 @@ public class PlayerLevel : MonoBehaviour
     private Slider experienceBar;
     private GameObject levelUpPopoup;
 
-    private float ExperienceNeeded => Level * 100f;
+    private float ExperienceNeeded => Level * experienceRequiredMultiplier;
 
     private string LevelText => $"Lvl: {Level}";
 

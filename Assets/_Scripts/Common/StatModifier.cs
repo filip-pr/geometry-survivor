@@ -8,6 +8,11 @@ public class StatModifier
     [SerializeField] private float flatIncrease = 0f;
     private readonly StatModifier parentModifier = null;
 
+    public StatModifier(StatModifier parent = null)
+    {
+        parentModifier = parent;
+    }
+
     public float Multiplier
     {
         get
@@ -25,7 +30,7 @@ public class StatModifier
 
     public float Modify(float baseStat)
     {
-        return (baseStat * Multiplier) + FlatIncrease;
+        return (baseStat + FlatIncrease) * Multiplier ;
     }
 
     public void IncreaseMultiplier(float amount)
