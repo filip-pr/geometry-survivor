@@ -5384,7 +5384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <UpgradeName>k__BackingField: HealthAndRegenUpgrade
   baseUpgradeCost: 1000
-  upgradeIncreaseStep: 10
+  upgradeIncreaseStep: 50
   upgradeAmountText: {fileID: 1568475527}
   upgradeCostText: {fileID: 2029046809}
   upgradeIncreaseButton: {fileID: 341842246}

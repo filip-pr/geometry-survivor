@@ -3,6 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerStats))]
 public class PlayerHealth : Health
 {
+    private GameManager gameManager;
+
     protected override void Start()
     {
         PlayerStats playerStats = GetComponent<PlayerStats>();
@@ -12,8 +14,13 @@ public class PlayerHealth : Health
         base.Start();
     }
 
+    public void SetupDeath(GameManager gameManager)
+    {
+        this.gameManager = gameManager;
+    }
+
     protected override void OnDeath()
     {
-        Debug.Log("Player has died.");
+        gameManager.EndGame();
     }
 }
