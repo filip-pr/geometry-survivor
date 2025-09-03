@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Script to manage player movement.
+/// </summary>
 [RequireComponent(typeof(PlayerStats))]
 public class PlayerController : MovementController
 {

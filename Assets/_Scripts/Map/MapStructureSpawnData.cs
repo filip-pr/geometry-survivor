@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Helper struct to hold data for spawning different map structures.
+/// </summary
 [System.Serializable]
 public struct MapStructureSpawnData : IWeightedItem
 {

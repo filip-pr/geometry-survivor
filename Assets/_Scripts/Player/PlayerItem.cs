@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Abstract base class for player items that can be leveled up and modify player stats.
+/// </summary>
 public abstract class PlayerItem : MonoBehaviour
 {
     abstract public string ItemName { get; }

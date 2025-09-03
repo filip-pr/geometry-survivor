@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Script to make a health bar follow a target transform with a given offset.
+/// </summary>
 public class HealthBarFollow : MonoBehaviour
 {
     public Transform Target { get; set; }

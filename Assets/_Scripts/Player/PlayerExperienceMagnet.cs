@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script to handle the experience magnet functionality for the player.
+/// </summary>
 [RequireComponent(typeof(CircleCollider2D))]
 public class PlayerExperienceMagnet : MonoBehaviour
 {

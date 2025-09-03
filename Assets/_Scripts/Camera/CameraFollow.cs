@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Script handling camera target follow movement with smoothing.
+/// </summary>
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private float smoothTime = 0.15f;

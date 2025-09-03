@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Script to manage enemy spawning and it's difficulty scaling over time.
+/// </summary>
 public class EnemyManager : MonoBehaviour
 {
     [field: SerializeField] public Transform Target { get; set; }
@@ -32,6 +35,9 @@ public class EnemyManager : MonoBehaviour
 
     private float SpawnPointsGainRate => spawnPointMultiplier * (1 + runTime / 60f);
 
+    /// <summary>
+    /// Spawn an enemy based on the provided EnemySpawnData.
+    /// </summary>
     private void SpawnEnemy(EnemySpawnData enemyData)
     {
         Vector2 spawnPosition = Random.insideUnitCircle.normalized * Random.Range(minSpawnDistance, maxSpawnDistance);
@@ -41,6 +47,9 @@ public class EnemyManager : MonoBehaviour
         enemy.GetComponent<EnemyController>().Target = Target;
     }
 
+    /// <summary>
+    /// Try spawning a wave of enemies if the interval has passed.
+    /// </summary>
     private void TrySpawnWave()
     {
         if (wavesSpawned > runTime / waveInterval) return;
@@ -55,6 +64,9 @@ public class EnemyManager : MonoBehaviour
         wavesSpawned++;
     }
 
+    /// <summary>
+    /// Try spawning a random enemy if enough time has passed and there are enough spawn points.
+    /// </summary>
     private void TrySpawnRandomEnemy()
     {
         if (runTime - lastSpawnTime < maxSpawnRate) return;

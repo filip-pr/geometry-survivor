@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+/// <summary>
+/// Abstract base class to manage movement, rotation and knockback for game objects.
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class MovementController : MonoBehaviour
 {
@@ -25,13 +29,22 @@ public abstract class MovementController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
+    /// <summary>
+    /// Deal knockback to the object in a given direction with a certain force. 
+    /// </summary>
     public void Push(Vector2 direction, float force)
     {
         knockbackVelocity += direction.normalized * force * Mathf.Max(1-knockbackResistance, 0);
     }
 
+    /// <summary>
+    /// Get the desired movement direction of the object.
+    /// </summary>
     protected abstract Vector2 GetMovementDirection();
 
+    /// <summary>
+    /// Update the rotation of the object.
+    /// </summary>
     protected virtual void UpdateRotation()
     {
         if (rigidBody.linearVelocity != Vector2.zero)
@@ -41,6 +54,9 @@ public abstract class MovementController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Increase the object's velocity by a vector or move it directly if it's ghosting.
+    /// </summary>
     private void UpdateVelocity(Vector2 amount)
     {
         if (IsGhosting)

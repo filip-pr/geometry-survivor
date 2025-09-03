@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Script to manage health and taking damage for game objects.
+/// </summary>
 [RequireComponent(typeof(Collider2D))]
 public abstract class Health : MonoBehaviour
 {
@@ -24,6 +28,9 @@ public abstract class Health : MonoBehaviour
         Heal(MaxHeath);
     }
 
+    /// <summary>
+    /// Set up the health bar UI for this object within the given canvas.
+    /// </summary>
     public void SetupHealthBar(Canvas canvas)
     {
         healthBar = Instantiate(healthBarPrefab, canvas.transform).GetComponent<Slider>();
@@ -40,8 +47,13 @@ public abstract class Health : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handle death of the game object (health reaching zero).
+    /// </summary>
     protected abstract void OnDeath();
 
+
+    /// Updates the health bar UI value and hide it if health is full.
     private void UpdateHealthBar()
     {
         if (healthBar == null) return;
@@ -56,6 +68,9 @@ public abstract class Health : MonoBehaviour
         healthBar.value = currentHealth;
     }
 
+    /// <summary>
+    /// Deal damage to the game object (possibly killing it).
+    /// </summary>
     public void Damage(float damage)
     {
         currentHealth -= damage;
@@ -71,6 +86,10 @@ public abstract class Health : MonoBehaviour
         UpdateHealthBar();
 
     }
+
+    /// <summary>
+    /// Heal the game object (possible killing it if health is negative).
+    /// </summary>
     public void Heal(float health)
     {
         Damage(-health);

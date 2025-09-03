@@ -1,6 +1,8 @@
-
 using UnityEngine;
 
+/// <summary>
+/// Stript to hold and manage player's stat modifiers.
+/// </summary>
 public class PlayerStats : MonoBehaviour
 {
     [field: SerializeField] public StatModifier MaxHealthModifier { get; set; }
@@ -11,6 +13,9 @@ public class PlayerStats : MonoBehaviour
     [field: SerializeField] public StatModifier ExperienceGainModifier { get; set ; }
     [field: SerializeField] public StatModifier ExperienceMagnetRangeModifier { get; set; }
 
+    /// <summary>
+    /// Set the stat modifiers based on the provided UpgradeManager.
+    /// </summary>
     public void SetUpgradeModifiers(UpgradeManager upgradeManager)
     {
         MaxHealthModifier = new StatModifier();

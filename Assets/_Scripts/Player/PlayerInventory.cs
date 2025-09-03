@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Script to manage the player's inventory and new item acquisition.
+/// </summary>
 [RequireComponent(typeof(PlayerStats))]
 public class PlayerInventory : MonoBehaviour
 {
@@ -28,6 +31,9 @@ public class PlayerInventory : MonoBehaviour
         AddItem(allItemsData[0]);
     }
 
+    /// <summary>
+    /// Setup the item slot UI for the player's inventory.
+    /// </summary>
     public void SetupItemSlots(Canvas canvas)
     {
         float itemSlotSize = itemSlotPrefab.GetComponent<RectTransform>().rect.width;
@@ -49,12 +55,17 @@ public class PlayerInventory : MonoBehaviour
             Destroy(itemSlotInstance);
         }
     }
-
+    /// <summary>
+    /// Get the display text for an item's level.
+    /// </summary>
     private string GetItemLevelText(int level)
     {
         return $"Lvl: {level.ToString()}";
     }
 
+    /// <summary>
+    /// Add a new item to the player's inventory.
+    /// </summary>
     private void AddItem(PlayerItemData item)
     {
         GameObject itemInstance = Instantiate(item.ItemPrefab, transform);
@@ -75,6 +86,9 @@ public class PlayerInventory : MonoBehaviour
         itemsHeld++;
     }
 
+    /// <summary>
+    /// Add a new item or upgrade an existing item in the player's inventory.
+    /// </summary>
     public PlayerItem AddOrUpgradeItem()
     {
         PlayerItemData randomChoice = WeightedRandom.Choose(allItemsData);

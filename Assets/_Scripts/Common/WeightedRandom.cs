@@ -7,8 +7,14 @@ public interface IWeightedItem
     public float Weight { get; }
 }
 
+/// <summary>
+/// Static utility class for weighted random selection.
+/// </summary>
 public static class WeightedRandom
 {
+    /// <summary>
+    /// Choose a random item weighted by it's weight.
+    /// </summary>
     public static T Choose<T>(IEnumerable<T> items) where T : IWeightedItem
     {
         float totalWeight = 0f;
@@ -33,6 +39,9 @@ public static class WeightedRandom
         return default;
     }
 
+    /// <summary>
+    /// Choose up to N unique random items weighted by their weight.
+    /// </summary>
     public static List<T> ChooseN<T>(IEnumerable<T> items, int n) where T : IWeightedItem
     {
         List<T> chosenItems = new List<T>();

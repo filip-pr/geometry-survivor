@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Script to handle the in-game timer display and logic.
+/// </summary>
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class Timer : MonoBehaviour
 {
@@ -21,11 +24,17 @@ public class Timer : MonoBehaviour
 
     public float TimeElapsed => timer;
 
+    /// <summary>
+    /// Stop the timer from counting up.
+    /// </summary>
     public void StopTimer()
     {
         stopped = true;
     }
 
+    /// <summary>
+    /// Make the timer start counting up.
+    /// </summary>
     public void StartTimer()
     {
         stopped = false;

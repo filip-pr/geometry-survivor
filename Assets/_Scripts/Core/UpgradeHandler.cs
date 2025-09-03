@@ -2,6 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Script to handle individual upgrade logic and UI.
+/// </summary>
 public class UpgradeHandler : MonoBehaviour
 {
     [field: SerializeField] public string UpgradeName { get; private set; }
@@ -25,6 +28,9 @@ public class UpgradeHandler : MonoBehaviour
 
     private int upgradeIncrease = 0;
 
+    /// <summary>
+    /// Update the UI elements to reflect the current upgrade state.
+    /// </summary>
     public void UpdateUI()
     {
         upgradeCostText.text = $"{NextUpgradeCost.ToString()} UP";
@@ -43,6 +49,9 @@ public class UpgradeHandler : MonoBehaviour
         upgradeLevel = PlayerPrefs.GetInt(UpgradeName, 0);
     }
 
+    /// <summary>
+    /// Confirm the upgrade increases, applying them to the upgrade level and saving to PlayerPrefs.
+    /// </summary>
     public void ConfirmUpgradeIncrease()
     {
         upgradeLevel += upgradeIncrease;
@@ -50,6 +59,9 @@ public class UpgradeHandler : MonoBehaviour
         PlayerPrefs.SetInt(UpgradeName, upgradeLevel);
     }
 
+    /// <summary>
+    /// Cancel the upgrade increases, reverting any changes.
+    /// </summary>
     public void CancelUpgradeIncrease()
     {
         while (upgradeIncrease > 0)
@@ -58,16 +70,22 @@ public class UpgradeHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Increase the upgrade increase, updating the points held and UI accordingly.
+    /// </summary>
     public void IncreaseUpgradeIncrease()
     {
-        upgradeManager.UpdateUpgradePointsToHold(NextUpgradeCost);
+        upgradeManager.AddUpgradePointsToHold(NextUpgradeCost);
         upgradeIncrease++;
         upgradeManager.UpdateUI();
     }
 
+    /// <summary>
+    /// Decrease the upgrade increase, updating the points held and UI accordingly.
+    /// </summary>
     public void DecreaseUpgradeIncrease()
     {
-        upgradeManager.UpdateUpgradePointsToHold(-CurrentUpgradeCost);
+        upgradeManager.AddUpgradePointsToHold(-CurrentUpgradeCost);
         upgradeIncrease--;
         upgradeManager.UpdateUI();
     }

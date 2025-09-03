@@ -3,6 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Script to handle overall upgrade management and UI.
+/// </summary>
 public class UpgradeManager : MonoBehaviour
 {
 
@@ -23,6 +26,9 @@ public class UpgradeManager : MonoBehaviour
         UpdateUI();
     }
 
+    /// <summary>
+    /// Update the all upgrade UI elements to reflect the current upgrade points and states.
+    /// </summary>
     public void UpdateUI()
     {
         if (upgradePointsHold > 0)
@@ -43,6 +49,9 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Confirm the upgrade increases of all upgrade handlers, deducting the held upgrade points.
+    /// </summary>
     public void ConfirmUpgradesIncrease()
     {
         foreach (var upgradeHandler in upgradeHandlers)
@@ -56,6 +65,9 @@ public class UpgradeManager : MonoBehaviour
         UpdateUI();
     }
 
+    /// <summary>
+    /// Cancel the upgrade increases of all upgrade handlers, reverting any changes and resetting held upgrade points.
+    /// </summary>
     public void CancelUpgradesIncrease()
     {
         foreach (var upgradeHandler in upgradeHandlers)
@@ -66,12 +78,18 @@ public class UpgradeManager : MonoBehaviour
         UpdateUI();
     }
 
-    public void UpdateUpgradePointsToHold(int amount)
+    /// <summary>
+    /// Add upgrade points to the upgrade points hold.
+    /// </summary>
+    public void AddUpgradePointsToHold(int amount)
     {
         upgradePointsHold += amount;
         UpdateUI();
     }
 
+    /// <summary>
+    /// Add upgrade points to the upgrade points total.
+    /// </summary>
     public void AddUpgradePoints(int amount)
     {
         upgradePoints += amount;
@@ -79,6 +97,9 @@ public class UpgradeManager : MonoBehaviour
         PlayerPrefs.SetInt(UpgradePointsKey, upgradePoints);
     }
 
+    /// <summary>
+    /// Get the UpgradeHandler by its upgrade name.
+    /// </summary>
     public UpgradeHandler GetUpgradeHandler(string upgradeName)
     {
         foreach (var upgradeHandler in upgradeHandlers)

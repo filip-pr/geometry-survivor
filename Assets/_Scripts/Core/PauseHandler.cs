@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Script handling pausing and resuming of the game.
+/// </summary>
 public class PauseHandler : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
@@ -9,7 +12,9 @@ public class PauseHandler : MonoBehaviour
 
     private bool isPaused = false; 
 
-
+    /// <summary>
+    /// Pause the game.
+    /// </summary>
     public void PauseGame()
     {
         pauseMenu.transform.SetAsLastSibling();
@@ -18,6 +23,10 @@ public class PauseHandler : MonoBehaviour
         isPaused = true;
     }
 
+
+    /// <summary>
+    /// Resume the game.
+    /// </summary>
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);

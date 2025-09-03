@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script to manage dynamic map tile generation and destruction based on target position.
+/// </summary>
 public class MapManager : MonoBehaviour
 {
     [field: SerializeField] public Transform GenerationCenter { get; set; }
@@ -19,6 +22,9 @@ public class MapManager : MonoBehaviour
     private Dictionary<Vector2Int, GameObject> mapTiles;
     private Vector2Int generationCenterTile;
 
+    /// <summary>
+    /// Get the map tile position for a given world position.
+    /// </summary>
     private Vector2Int GetMapTilePosition(Vector2 position)
     {
         return new Vector2Int(
@@ -36,6 +42,9 @@ public class MapManager : MonoBehaviour
         GenerateMapTiles();
     }
 
+    /// <summary>
+    /// Randomly add structures to the given map tile.
+    /// </summary>
     private void AddStructures(GameObject tile)
     {
         List<GameObject> placedStructures = new();
@@ -63,7 +72,10 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    private void GenerateMapTile(Vector2Int position)
+    /// <summary>
+    /// Generate a map tile at the given tile position if it doesn't already exist.
+    /// </summary>
+    private void TryGenerateMapTile(Vector2Int position)
     {
         if (!mapTiles.ContainsKey(position))
         {
@@ -74,6 +86,9 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Generate map tiles around the generation center within the generation distance.
+    /// </summary>
     private void GenerateMapTiles()
     {
         int countX = Mathf.CeilToInt(GenerationDistance / mapTileSize.x);
@@ -83,11 +98,14 @@ public class MapManager : MonoBehaviour
             for (int y = -countY; y <= countY; y++)
             {
                 Vector2Int tilePosition = generationCenterTile + new Vector2Int(x, y);
-                GenerateMapTile(tilePosition);
+                TryGenerateMapTile(tilePosition);
             }
         }
     }
 
+    /// <summary>
+    /// Destroy map tiles that are beyond the destroy distance from the generation center.
+    /// </summary>
     private void DestroyTiles()
     {
         List<Vector2Int> tilesToDestroy = new List<Vector2Int>();

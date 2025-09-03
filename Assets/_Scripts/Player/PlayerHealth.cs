@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Script to manage player health and handle death.
+/// </summary>
 [RequireComponent(typeof(PlayerStats))]
 public class PlayerHealth : Health
 {

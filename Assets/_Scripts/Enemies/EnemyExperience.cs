@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Script to manage enemy experience drops.
+/// </summary>
 [RequireComponent(typeof(Collider2D))]
 public class EnemyExperience : MonoBehaviour
 {

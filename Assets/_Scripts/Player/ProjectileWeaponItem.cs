@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Abstract base class for projectile weapon items, automatically handles firing rate and projectile spawning.
+/// </summary>
 public abstract class ProjectileWeaponItem : PlayerItem
 {
 
@@ -14,6 +17,9 @@ public abstract class ProjectileWeaponItem : PlayerItem
     protected StatModifier knockBackModifier;
     protected StatModifier attackSpeedModifier;
 
+    /// <summary>
+    /// Spawn a projectile and apply damage and knockback modifiers if applicable.
+    /// </summary>
     protected GameObject SpawnProjectile() {
         GameObject projectile = Instantiate(ProjectilePrefab, ProjectileParent);
         if (projectile.TryGetComponent<DamageDealer>(out var damageDealer))
@@ -34,6 +40,9 @@ public abstract class ProjectileWeaponItem : PlayerItem
         attackSpeedModifier = new StatModifier();
     }
 
+    /// <summary>
+    /// Fire the weapon.
+    /// </summary>
     protected abstract void Fire();
 
     private void Update()

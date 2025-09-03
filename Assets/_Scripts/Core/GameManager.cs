@@ -2,6 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Script handling the overall game state and flow.
+/// </summary>
 [RequireComponent(typeof(PlayerInput))]
 public class GameManager : MonoBehaviour
 {
@@ -27,21 +30,33 @@ public class GameManager : MonoBehaviour
     private GameObject enemyManager;
     private GameObject gameTimer;
 
+    /// <summary>
+    /// Set the camera position to the title screen.
+    /// </summary>
     public void ToTitleScreen()
     {
         Camera.main.GetComponent<CameraFollow>().Target = titleScreen;
     }
 
-    public void ToShop()
+    /// <summary>
+    /// Set the camera position to the upgrade shop screen.
+    /// </summary>
+    public void ToShopScreen()
     {
         Camera.main.GetComponent<CameraFollow>().Target = shopScreen;
     }
 
+    /// <summary>
+    /// Set the camera position to the upgrade points end screen.
+    /// </summary>
     public void ToUpgradePointsEndScreen()
     {
         Camera.main.GetComponent<CameraFollow>().Target = upgradePointsEndScreen;
     }
 
+    /// <summary>
+    /// Set the camera position to the player.
+    /// </summary>
     public void ToPlayer()
     {
         if (player != null)
@@ -50,11 +65,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Exit the application.
+    /// </summary>
     public void ExitApp()
     {
         Application.Quit();
     }
 
+    /// <summary>
+    /// Clear all game instance objects.
+    /// </summary>
     private void ClearGame()
     {
         if (player != null)
@@ -75,12 +96,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Prepare the UI for the main menu.
+    /// </summary>
     public void ReadyMainMenu()
     {
         gameUICanvas.gameObject.SetActive(false);
         menuUICanvas.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Start a new game instance.
+    /// </summary>
     public void StartGame()
     {
         ClearGame();
@@ -106,6 +133,9 @@ public class GameManager : MonoBehaviour
         ToPlayer();
     }
 
+    /// <summary>
+    /// Calculate and update upgrade points based on the performance in the last game instance.
+    /// </summary>
     private void UpdateUpgradePoints()
     {
         int levelsGained = player.GetComponent<PlayerLevel>().Level - 1;
@@ -124,6 +154,9 @@ public class GameManager : MonoBehaviour
         upgradeManager.AddUpgradePoints(totalWithBonus);
     }
 
+    /// <summary>
+    /// End the game instance, update upgrade points, and return to the main menu.
+    /// </summary>
     public void EndGame()
     {
         UpdateUpgradePoints();

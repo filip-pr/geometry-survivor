@@ -2,6 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Script to manage player leveling, experience gain, and level-up behavior.
+/// </summary>
 [RequireComponent(typeof(PlayerStats))]
 public class PlayerLevel : MonoBehaviour
 {
@@ -22,6 +25,9 @@ public class PlayerLevel : MonoBehaviour
 
     private string LevelText => $"Lvl: {Level}";
 
+    /// <summary>
+    /// Setup the level HUD elements on the provided canvas.
+    /// </summary>
     public void SetupLevelHUD(Canvas canvas)
     {
         levelText = Instantiate(levelTextPrefab, canvas.transform).GetComponent<TextMeshProUGUI>();        
@@ -50,6 +56,9 @@ public class PlayerLevel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handle actions to perform when the player levels up.
+    /// </summary>
     private void OnLevelUp()
     {
         string levelUpInfo = "";
@@ -77,7 +86,9 @@ public class PlayerLevel : MonoBehaviour
         levelUpPopoup.SetActive(true);
     }
 
-
+    /// <summary>
+    /// Add experience to the player and handle level-ups if experience threshold is crossed.
+    /// </summary>
     public void GainExperience(float amount)
     {
         experience += ExperienceGainModifier == null ? amount : ExperienceGainModifier.Modify(amount);

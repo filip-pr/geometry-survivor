@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Script to manage enemy movement.
+/// </summary>
 public class EnemyController : MovementController
 {
     [field: SerializeField] public Transform Target { get; set; }
