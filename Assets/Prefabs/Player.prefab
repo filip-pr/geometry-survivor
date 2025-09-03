@@ -315,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 1
   experience: 0
-  experienceRequiredMultiplier: 250
+  experienceRequiredMultiplier: 100
   levelTextPrefab: {fileID: 6063249515025191492, guid: 8f5b4d4176df4764e853ab66fdde9d41, type: 3}
   experienceBarPrefab: {fileID: 6070679838886899114, guid: 0b27556ce99b7a747929228b01203f2a, type: 3}
   levelUpPopoupPrefab: {fileID: 5932398651952745254, guid: 4fdeb318666aff24da7635b86aec5dea, type: 3}
