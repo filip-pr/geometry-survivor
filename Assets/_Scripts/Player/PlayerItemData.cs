@@ -1,10 +1,10 @@
 using UnityEngine;
 
 /// <summary>
-/// Struct to hold data for player items.
+/// Class to hold data for player items.
 /// </summary>
 [System.Serializable]
-public struct PlayerItemData : IWeightedItem
+public class PlayerItemData : IWeightedItem
 {
     [field: SerializeField] public GameObject ItemPrefab { get; private set; }
     [field: SerializeField] public float DropWeight { get; set; }
