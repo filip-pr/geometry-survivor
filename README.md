@@ -4,7 +4,19 @@
 
 ### Controls
 
-In game movement is controlled by WASD, with ESC to pause. In me
+#### Menu
+
+Navigating through the menu is done with a mouse.
+
+#### Game
+
+Movement is controlled by WASD or the arrow keys.
+
+Escape key can be used to pause the game.
+
+### Running the game
+
+TODO
 
 ## Developer Documentation
 
