@@ -61,7 +61,7 @@ MonoBehaviour:
   - <EnemyPrefab>k__BackingField: {fileID: 3959644142728701306, guid: 88eef8cab96ff67449e41946c7d13e03, type: 3}
     <SpawnWeight>k__BackingField: 5
     <SpawnPointCost>k__BackingField: 25
-  - <EnemyPrefab>k__BackingField: {fileID: 3959644142728701306, guid: 88eef8cab96ff67449e41946c7d13e03, type: 3}
+  - <EnemyPrefab>k__BackingField: {fileID: 3959644142728701306, guid: a25ca8b5e6f052c41a4779c7f70fa8f7, type: 3}
     <SpawnWeight>k__BackingField: 2
     <SpawnPointCost>k__BackingField: 100
   nonWaveSpawnPoints: 0
@@ -69,6 +69,6 @@ MonoBehaviour:
   waveSpawnPointRatio: 0.7
   spawnPointMultiplier: 10
   waveInterval: 30
-  enemyHealthIncreaseRate: 10
+  enemyHealthIncreaseRate: 25
   enemyDamageIncreaseRate: 5
   maxSpawnRate: 0.5

@@ -990,7 +990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <UpgradeName>k__BackingField: ExperienceGainUpgrade
-  baseUpgradeCost: 1000
+  baseUpgradeCost: 250
   upgradeIncreaseStep: 10
   upgradeAmountText: {fileID: 1454146924}
   upgradeCostText: {fileID: 1701191260}
@@ -2877,7 +2877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <UpgradeName>k__BackingField: MovementSpeedUpgrade
-  baseUpgradeCost: 1000
+  baseUpgradeCost: 250
   upgradeIncreaseStep: 10
   upgradeAmountText: {fileID: 1663206480}
   upgradeCostText: {fileID: 1337619398}
@@ -3340,7 +3340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <UpgradeName>k__BackingField: UpgradePointsGainUpgrade
-  baseUpgradeCost: 1000
+  baseUpgradeCost: 250
   upgradeIncreaseStep: 10
   upgradeAmountText: {fileID: 1896648393}
   upgradeCostText: {fileID: 593758871}
@@ -4705,7 +4705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <UpgradeName>k__BackingField: DamageAndKnockbackUpgrade
-  baseUpgradeCost: 1000
+  baseUpgradeCost: 250
   upgradeIncreaseStep: 10
   upgradeAmountText: {fileID: 714265149}
   upgradeCostText: {fileID: 936852504}
@@ -5383,7 +5383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <UpgradeName>k__BackingField: HealthAndRegenUpgrade
-  baseUpgradeCost: 1000
+  baseUpgradeCost: 250
   upgradeIncreaseStep: 50
   upgradeAmountText: {fileID: 1568475527}
   upgradeCostText: {fileID: 2029046809}
@@ -5443,7 +5443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <UpgradeName>k__BackingField: ExpMagnetRangeUpgrade
-  baseUpgradeCost: 1000
+  baseUpgradeCost: 250
   upgradeIncreaseStep: 10
   upgradeAmountText: {fileID: 1172869479}
   upgradeCostText: {fileID: 648181316}

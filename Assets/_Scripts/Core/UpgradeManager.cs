@@ -23,6 +23,10 @@ public class UpgradeManager : MonoBehaviour
     private void Awake()
     {
         upgradePoints = PlayerPrefs.GetInt(UpgradePointsKey, 0);
+    }
+
+    private void Start()
+    {
         UpdateUI();
     }
 
@@ -95,6 +99,7 @@ public class UpgradeManager : MonoBehaviour
         upgradePoints += amount;
         UpdateUI();
         PlayerPrefs.SetInt(UpgradePointsKey, upgradePoints);
+        PlayerPrefs.Save();
     }
 
     /// <summary>

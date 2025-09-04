@@ -33,7 +33,14 @@ public class UpgradeHandler : MonoBehaviour
     /// </summary>
     public void UpdateUI()
     {
-        upgradeCostText.text = $"{NextUpgradeCost.ToString()} UP";
+        if (upgradeLevel + upgradeIncrease >= maxUpgradeLevel)
+        {
+            upgradeCostText.text = "MAX";
+        }
+        else
+        {
+            upgradeCostText.text = $"{NextUpgradeCost.ToString()} UP";
+        }
         if (upgradeIncrease > 0) { 
             upgradeAmountText.text = $"+{UpgradeAmount.ToString()} (+{(upgradeIncrease * upgradeIncreaseStep).ToString()}) %";
         }
